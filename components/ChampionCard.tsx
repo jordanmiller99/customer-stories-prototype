@@ -30,10 +30,6 @@ export default function ChampionCard({ champion }: ChampionCardProps) {
         ) : (
           <div className={`w-full h-full ${champion.portraitTint}`} />
         )}
-        {/* Level pill — overlaid on portrait */}
-        <div className="absolute top-3 left-3 pill-label">
-          {champion.championLevel} Champion
-        </div>
       </div>
 
       {/* Card body */}

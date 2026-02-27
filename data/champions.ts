@@ -29,7 +29,7 @@ export const champions: ChampionStory[] = [
     championLevel: 'Green',
     editorialHeadline: 'How Bri Went from Shakespeare to LLMs',
     introParagraph:
-      'Bri Callahan spent eight years teaching AP Literature in a Chicago public school before she ever touched a content brief. She still assigns herself summer reading lists. These days she runs content operations at Paragon Financial, a fintech startup with outsized ambitions, and credits a single AirOps cohort for reshaping how she thinks about language at scale. Her desk has a laminated card that reads: "Would Hemingway use an em dash here? No. Move on."',
+      'Bri Callahan spent eight years teaching AP Literature in a Chicago public school before she ever touched a content brief. She still assigns herself summer reading lists. These days she runs content operations at Paragon Financial, a fintech startup with outsized ambitions, and has become one of the sharper thinkers in the room on how language works at scale. Her desk has a laminated card that reads: "Would Hemingway use an em dash here? No. Move on."',
     qa: [
       {
         question: 'How do you describe what you do for work?',
@@ -42,9 +42,9 @@ export const champions: ChampionStory[] = [
           "Three years ago I was proud of my quality, but I was exhausted. Now I think about content the way a composer thinks about arrangements: structures and patterns I set up once, and the work flows through them. The craft is still there. It just doesn't have to be heroic every time.",
       },
       {
-        question: 'When did you first learn about content engineering?',
+        question: 'Your path to content leadership is unusual — you taught AP Literature for eight years. What made you leave the classroom?',
         answer:
-          "I stumbled into a webinar thinking it was about AI tools. The framing was different: inputs, outputs, feedback loops, systems. I'm a former English teacher. I love how language works at the level of structure. Something clicked, and I signed up for the cohort the next morning.",
+          "Restlessness, mostly. I'd become very good at teaching, but public schools were getting harder to work in — resources shrinking while expectations grew. A former student connected me with a startup that needed someone who could write and think structurally about language. I said yes thinking it was temporary. That was nine years ago. The surprise was that teaching and content strategy use exactly the same muscles: you're always thinking about how to transfer knowledge from someone who has it to someone who needs it.",
       },
       {
         question: 'What are you most excited about in the future of marketing?',
@@ -72,9 +72,9 @@ export const champions: ChampionStory[] = [
           "My CEO came around fast when I showed him metrics. My contractor was the harder sell. She worried I was automating her out of a job. I explained that the goal was to stop doing the boring parts so she could focus on what actually uses her brain. Now she's one of the biggest advocates.",
       },
       {
-        question: "What advice would you give someone just getting started?",
+        question: "What's the career lesson that took you longest to learn?",
         answer:
-          "Start with one workflow, not your whole operation. Pick the thing you do the most that drives you the most insane. For me it was meta descriptions. I built a system for that first, got comfortable, then expanded. If you try to engineer everything at once you'll just create chaos and blame the methodology.",
+          "That asking for help isn't the same as being unprepared. I spent years trying to figure everything out before I said anything, which meant I spent a lot of time stuck. Now I hire people who ask good questions faster than they find their own answers. The people who ask early are usually the ones learning fastest.",
       },
       {
         question: 'Are there other areas of your life where you think in systems?',
@@ -84,8 +84,8 @@ export const champions: ChampionStory[] = [
     ],
     pullQuotes: [
       "I run a content factory that also has a soul.",
-      'The bar got raised. That\'s good for people who actually care about writing.',
-      'Start with one workflow, not your whole operation.',
+      "The bar got raised. That's good for people who actually care about writing.",
+      "Teaching and content strategy use exactly the same muscles.",
     ],
     heroIllustration: '/illustrations/placeholder-hero.svg',
     detailIllustrations: [
@@ -106,7 +106,7 @@ export const champions: ChampionStory[] = [
     championLevel: 'Gold',
     editorialHeadline: 'The Skeptic Who Became the Evangelist',
     introParagraph:
-      "Marcus Reid has a rule: he will not attend a webinar with the word 'revolutionary' in the title. He runs SEO at Terrace Commerce, a mid-market outdoor furniture brand, and has seen enough trend cycles to maintain a healthy skepticism about anything that promises to change everything. He came to content engineering not because he believed the pitch, but because citation data in AirOps made him curious. One dataset later, he was building a 40-slide internal presentation.",
+      "Marcus Reid has a rule: he will not attend a webinar with the word 'revolutionary' in the title. He runs SEO at Terrace Commerce, a mid-market outdoor furniture brand, and has seen enough trend cycles to maintain a healthy skepticism about anything that promises to change everything. He came to content engineering not because he believed the pitch, but because the data changed his priors. One dataset later, he was building a 40-slide internal presentation.",
     qa: [
       {
         question: 'How do you describe what you do for work?',
@@ -119,9 +119,9 @@ export const champions: ChampionStory[] = [
           "What's changed is what counts as a 'good' piece of content. Three years ago I could tell you a word count and feel okay about it. Now the question is whether the content is something an AI model would confidently cite. That's a much harder bar and a much more interesting problem.",
       },
       {
-        question: 'When did you first learn about content engineering?',
+        question: 'You describe yourself as a skeptic. What does it actually take to change your mind?',
         answer:
-          "I did not have a lightning bolt moment. I got a demo of AirOps because someone on LinkedIn was talking about citation tracking, and I am a sucker for new data. When I saw that you could see which content was getting cited by AI models and why, something shifted. Not a philosophy, a metric I could act on.",
+          "Data, always data. When AI overviews started appearing in search results, I noticed traffic behaving in ways the old models couldn't explain. I started pulling apart which content was surviving and why. What I found changed my approach entirely — not because someone sold me on a philosophy, but because the numbers stopped making sense until I started looking at them differently. I'm still skeptical. I just updated my priors.",
       },
       {
         question: 'What are you most excited about in the future of marketing?',
@@ -136,12 +136,12 @@ export const champions: ChampionStory[] = [
       {
         question: "What's something you've accomplished that you never thought possible before?",
         answer:
-          "We got cited in an AI overview for a search term with half a million monthly searches. For outdoor furniture. It took seven months of deliberate content engineering work to get there. When I saw it I genuinely called my wife over to the laptop. She thought I was showing her something much more interesting.",
+          "We got cited in an AI overview for a search term with half a million monthly searches. For outdoor furniture. It took seven months of deliberate work to get there. When I saw it I genuinely called my wife over to the laptop. She thought I was showing her something much more interesting.",
       },
       {
         question: "What's the biggest win you're most proud of?",
         answer:
-          "We rebuilt our buying guides from scratch: not just for keywords, but mapping every real question a buyer has, the functional, the taste, the anxiety questions about weather and durability. The traffic impact was good. The conversion impact was better. Customer service told me basic ticket questions went down.",
+          "We rebuilt our buying guides from scratch: not just for keywords, but mapping every real question a buyer has — the functional, the taste, the anxiety questions about weather and durability. The traffic impact was good. The conversion impact was better. Customer service told me basic ticket questions went down.",
       },
       {
         question: 'How did your team respond when you started doing things differently?',
@@ -149,9 +149,9 @@ export const champions: ChampionStory[] = [
           "My manager took the 40-slide deck and said 'do it.' The content team was harder. I had to avoid the energy of 'everything you've been doing is wrong.' What worked was asking questions: what do you wish you knew before writing this piece? That opened the door.",
       },
       {
-        question: "What advice would you give someone just getting started?",
+        question: "What's the career advice you find yourself giving most often?",
         answer:
-          "Get your data first. Spend a few weeks looking at what's actually performing: what's getting cited, what's converting. You'll find two or three pieces doing ten times the work of everything else. That tells you more about what good content engineering looks like for your situation than any framework. Build from evidence.",
+          "Get your data first. Spend real time understanding what's actually performing before you try to change anything. Most people diagnose the problem they want to solve rather than the one in front of them. The content I'm most proud of came from sitting with uncomfortable data for a few weeks, finding the two or three pieces doing most of the work, and asking why. That diagnostic work is not glamorous. But it is the work.",
       },
       {
         question: "What's something you're obsessed with outside of work?",
@@ -160,9 +160,9 @@ export const champions: ChampionStory[] = [
       },
     ],
     pullQuotes: [
-      "Not a philosophy. A metric I could act on.",
-      "It took seven months of deliberate content engineering work. For outdoor furniture.",
-      'Build from evidence, not from theory.',
+      "I'm still skeptical. I just updated my priors.",
+      "It took seven months of deliberate work to get there. For outdoor furniture.",
+      "Most people diagnose the problem they want to solve, not the one in front of them.",
     ],
     heroIllustration: '/illustrations/placeholder-hero.svg',
     detailIllustrations: [
@@ -183,7 +183,7 @@ export const champions: ChampionStory[] = [
     championLevel: 'Gold',
     editorialHeadline: 'She Built the Workflow That Got Her Hired',
     introParagraph:
-      "Priya Menon spent four years as a freelance content strategist before she built herself into a full-time job she didn't know she wanted. Working across B2B SaaS clients, she started developing content engineering workflows partly out of necessity and partly out of intellectual curiosity. When Lattice Labs saw her process deck, they didn't offer her a project. They offered her the head of content role. She accepted, then spent three days figuring out if she'd made a mistake. She hadn't.",
+      "Priya Menon spent four years as a freelance content strategist before she built herself into a full-time job she didn't know she wanted. Working across B2B SaaS clients, she started developing content workflows partly out of necessity and partly out of intellectual curiosity. When Lattice Labs saw her process deck, they didn't offer her a project. They offered her the head of content role. She accepted, then spent three days figuring out if she'd made a mistake. She hadn't.",
     qa: [
       {
         question: 'How do you describe what you do for work?',
@@ -196,9 +196,9 @@ export const champions: ChampionStory[] = [
           "When I was freelancing, I thought of myself as a writer who was pretty good at strategy. Now I think of myself as a systems designer who writes. It's a complete reframe. The output still has to be good writing. But the architecture that produces it is what I spend most of my time on.",
       },
       {
-        question: 'When did you first learn about content engineering?',
+        question: 'What moment in your career made you rethink how you were working?',
         answer:
-          "I was on my third client project of the quarter, burning through every evening. A friend sent me a link more as a joke than anything: 'this sounds very you.' She was right. Reading it felt like someone had named a thing I'd been doing instinctively but never had a framework for. By Monday I had rebuilt two client workflows.",
+          "Burnout. Third client project of a hard quarter, delivering good work and barely sleeping. I started auditing my own process the way I'd audit a client's workflow. What I found was that everything ran on my memory and personal effort — I had good instincts but no real architecture underneath them. That gap between what I thought I was doing and what I was actually doing was uncomfortable to see clearly. It was also the most useful thing I've ever learned about my own work.",
       },
       {
         question: 'What are you most excited about in the future of marketing?',
@@ -223,23 +223,23 @@ export const champions: ChampionStory[] = [
       {
         question: 'How did your team respond when you started doing things differently?',
         answer:
-          "I was brought in to do things differently, so the friction was different. But I had to earn trust with writers who worried content engineering meant less creative freedom. I showed by example that the framework makes creative work better: less mental energy on structure means more for the parts that require creativity.",
+          "I was brought in to do things differently, so the friction was different. But I had to earn trust with writers who worried that more process meant less creative freedom. I showed by example that the framework makes creative work better: less mental energy on structure means more for the parts that actually require creativity.",
       },
       {
-        question: "What advice would you give someone just getting started?",
+        question: "What's something about content work that took you a long time to really understand?",
         answer:
-          "Document your current process before you try to improve it. Write down exactly what you do to produce one piece of content, every step, every decision. You'll see where the waste is and where the actual craft lives. Those are the two things you need to know before you can build anything better.",
+          "That the quality of your thinking before you write matters more than anything you do while writing. I spent years trying to improve my writing. What I should have been improving was the preparation: the research, the structural thinking, the clarity about who I was writing for and what I needed them to understand. The writing itself got much easier once I stopped shortcutting that part.",
       },
       {
         question: 'What would you be doing if you were not in marketing?',
         answer:
-          "I got a master's in comparative literature. I'd probably be teaching somewhere, or writing criticism. I read constantly, mostly literary fiction and books about linguistics or translation theory. How meaning gets constructed across languages informs how I think about content more than any marketing book I've read.",
+          "I got a master's in comparative literature. I'd probably be teaching somewhere, or writing criticism. I read constantly — mostly literary fiction and books about linguistics or translation theory. How meaning gets constructed across languages informs how I think about content more than any marketing book I've read.",
       },
     ],
     pullQuotes: [
       "I got hired into a head of content role because of a workflow document. Not a portfolio, not a writing sample.",
       "Good content doesn't expire the way an ad campaign does.",
-      "Document your current process before you try to improve it. You can't engineer what you can't see.",
+      "The quality of your thinking before you write matters more than anything you do while writing.",
     ],
     heroIllustration: '/illustrations/placeholder-hero.svg',
     detailIllustrations: [
@@ -258,9 +258,9 @@ export const champions: ChampionStory[] = [
     company: 'Wellpath Technologies',
     role: 'VP of Growth',
     championLevel: 'Green',
-    editorialHeadline: "He Tripled Output Without Adding a Single Hire",
+    editorialHeadline: "The VP Who Doesn't Hire Problems Away",
     introParagraph:
-      "DeShawn Okafor keeps a sticky note on his monitor that says 'Don't hire the problem away.' It's a philosophy from his first startup job, and the lens through which he evaluated AirOps when his content team at Wellpath Technologies was falling behind demand. Instead of adding headcount, he built a content engineering system that tripled the team's output in a quarter. Six months later he was promoted to VP of Growth. The sticky note is still there.",
+      "DeShawn Okafor keeps a sticky note on his monitor that says 'Don't hire the problem away.' It's a philosophy from his first startup job, and the lens through which he approaches every constraint his growth team hits. When his content team at Wellpath Technologies was falling behind demand, he rebuilt the system instead of adding headcount — and tripled output in a quarter. Six months later he was promoted to VP of Growth. The sticky note is still there.",
     qa: [
       {
         question: 'How do you describe what you do for work?',
@@ -273,14 +273,14 @@ export const champions: ChampionStory[] = [
           "I used to think of content as something my team produced. Now I think of it as something we engineer. Production is reactive: someone asks for a piece, a writer makes it. Engineering is proactive: you map the buyer journey, identify the gaps, build the infrastructure to fill them. Same outcomes, completely different path.",
       },
       {
-        question: 'When did you first learn about content engineering?',
+        question: "That sticky note on your monitor — 'Don't hire the problem away.' Where does that philosophy come from?",
         answer:
-          "I was at a growth conference, expecting another AI hype talk. The speaker opened with: 'What's the cost of one good piece of content versus ten mediocre ones?' Then showed actual data. I texted my content lead mid-session: 'Can you get into the AirOps cohort this quarter?' She did. We both ended up going.",
+          "My first startup job, a growth role at a company with more ambition than budget. Every time we hit a constraint, leadership's reflex was to hire around it. Half those hires didn't stick because the underlying problem was process, not people. I internalized that hard. Now my first question when something isn't working is: is this a people problem or a design problem? Ninety percent of the time it's design. That's good news, because design you can fix.",
       },
       {
         question: 'What are you most excited about in the future of marketing?',
         answer:
-          "Personalization at depth, not in the creepy surveillance way, but in the meaningful 'this was written for your exact situation' way. Healthcare is a category where that really matters. A nurse practitioner and a practice administrator have completely different needs. Content engineering lets you build for both without doubling your workload.",
+          "Personalization at depth — not in the creepy surveillance way, but in the meaningful 'this was written for your exact situation' way. Healthcare is a category where that really matters. A nurse practitioner and a practice administrator have completely different needs. Content engineering lets you build for both without doubling your workload.",
       },
       {
         question: 'What are you most nervous about in the future of marketing?',
@@ -295,7 +295,7 @@ export const champions: ChampionStory[] = [
       {
         question: "What's the biggest win you're most proud of?",
         answer:
-          "We built a resource library for independent practice operators, a segment we'd always wanted to serve but never had bandwidth for. In six months: 80 pieces of useful operational content. It became our biggest source of qualified pipeline for that segment, more than paid ads or outbound. And it's still working today.",
+          "We built a resource library for independent practice operators, a segment we'd always wanted to serve but never had bandwidth for. In six months: 80 pieces of useful operational content. It became our biggest source of qualified pipeline for that segment — more than paid ads or outbound. And it's still working today.",
       },
       {
         question: 'How did your team respond when you started doing things differently?',
@@ -303,9 +303,9 @@ export const champions: ChampionStory[] = [
           "My content lead was immediately into it. My CEO wanted a proof of concept first. So we ran a quarter-long test: same team, new methodology, measure everything. The numbers made the argument for us.",
       },
       {
-        question: "What advice would you give someone just getting started?",
+        question: "What's the hardest part of your job that nobody talks about?",
         answer:
-          "Don't make the case in the abstract. Run a test. Pick one content type, one audience segment, one quarter. Document your baseline, apply the methodology, measure the output. If it's right for your team, the results will do the persuading. If they don't, you've learned something valuable without betting everything on it.",
+          "Translating outcomes into decisions in real time, with incomplete information. The numbers can tell you what's working, but they rarely tell you exactly why — and the 'why' is what you need to make the next decision. I've gotten more comfortable sitting in that uncertainty without rushing to fill it. The best call I've made this year came from waiting two more weeks before deciding. The worst ones came from deciding too fast.",
       },
       {
         question: "What's something you're obsessed with outside of work?",
@@ -314,9 +314,9 @@ export const champions: ChampionStory[] = [
       },
     ],
     pullQuotes: [
-      "We didn't just publish three times as many pieces. We published three times as many pieces that met our quality bar and cleared compliance review.",
-      "Don't make the case in the abstract. Run a test.",
-      "That content is still working today.",
+      "Ninety percent of the time it's a design problem. That's good news, because design you can fix.",
+      "We didn't just publish three times as many pieces. We published three times as many that cleared compliance review.",
+      "The best call I've made this year came from waiting two more weeks before deciding.",
     ],
     heroIllustration: '/illustrations/placeholder-hero.svg',
     detailIllustrations: [
@@ -337,7 +337,7 @@ export const champions: ChampionStory[] = [
     championLevel: 'Gold',
     editorialHeadline: 'The Agency Owner Who Rewrote the Business Model',
     introParagraph:
-      "Sofia Reyes ran her content agency for six years the traditional way: hire writers, pitch clients, deliver briefs, repeat. It worked, up to a point. She was making money, clients were happy, and she was working 60-hour weeks. Then she rebuilt her entire methodology around content engineering, doubled her client roster in six months, and started going home at five. She tells people content engineering didn't save her agency. It saved her.",
+      "Sofia Reyes ran her content agency for six years the traditional way: hire writers, pitch clients, deliver briefs, repeat. It worked, up to a point. She was making money, clients were happy, and she was working 60-hour weeks. Then she rebuilt her entire methodology, doubled her client roster in six months, and started going home at five. She tells people the systems didn't save her agency. They saved her.",
     qa: [
       {
         question: 'How do you describe what you do for work?',
@@ -350,19 +350,19 @@ export const champions: ChampionStory[] = [
           "Three years ago, we were a content production agency. Entirely dependent on the hours of my team. If a writer got sick, a client felt it immediately. Now we're a systems agency. The workflows don't depend on any one person's skills. I can take on twice as many clients with the same team size.",
       },
       {
-        question: 'When did you first learn about content engineering?',
+        question: 'After six years of running your agency the traditional way, what made you rebuild it?',
         answer:
-          "I had a difficult conversation with a client about turnaround times. It forced me to look honestly at my processes. I went looking for better frameworks. My first reaction was defensive: 'I already do all this.' My second reaction, a week later: 'I do parts of this, but not the systematic version.' That gap was where all the improvement lived.",
+          "An honest conversation I couldn't win. A client needed faster turnarounds than my process could deliver — not unreasonably, just faster than I was built for. I remember sitting with that feedback and realizing I had two choices: make an excuse that might satisfy her briefly, or actually fix the problem. Fixing it meant admitting my agency had been running on individual talent rather than real systems. That realization was uncomfortable for about thirty seconds. And clarifying for much longer.",
       },
       {
         question: 'What are you most excited about in the future of marketing?',
         answer:
-          "Agencies that think like engineers are going to have a serious competitive advantage. The shops still operating like it's fifteen years ago, a creative director and some writers and a lot of personality, that model isn't dead but it's getting harder to make profitable. The agencies that survive are building systems.",
+          "Agencies that think like engineers are going to have a serious competitive advantage. The shops still operating like it's fifteen years ago — a creative director and some writers and a lot of personality — that model isn't dead but it's getting harder to make profitable. The agencies that survive are building systems.",
       },
       {
         question: 'What are you most nervous about in the future of marketing?',
         answer:
-          "Clients who think content engineering is a shortcut. It's not. It still requires craft, judgment, and strategy at every step. I've had conversations with potential clients who only want to talk about production speed. Volume is the wrong goal. Systematic quality is the goal.",
+          "Clients who think process is a shortcut. It's not. It still requires craft, judgment, and strategy at every step. I've had conversations with potential clients who only want to talk about production speed. Volume is the wrong goal. Systematic quality is the goal.",
       },
       {
         question: "What's something you've accomplished that you never thought possible before?",
@@ -372,7 +372,7 @@ export const champions: ChampionStory[] = [
       {
         question: "What's the biggest win you're most proud of?",
         answer:
-          "We rebuilt a tech company's content operation from scratch in four months. Good writers, terrible processes. We built a content engineering framework specific to their audience, trained their team, and handed it back. Six months later traffic was up 140% and they'd created a full-time content engineering role internally.",
+          "We rebuilt a tech company's content operation from scratch in four months. Good writers, terrible processes. We built a framework specific to their audience, trained their team, and handed it back. Six months later traffic was up 140% and they'd created a full-time content engineering role internally. When clients build internal capability because of your work, that's the real win.",
       },
       {
         question: 'How did your team respond when you started doing things differently?',
@@ -380,9 +380,9 @@ export const champions: ChampionStory[] = [
           "My team had healthy skepticism: 'Is this another thing Sofia's excited about for three weeks?' What changed their minds was involving them before implementation. I invited them to break the workflow, find the flaws, tell me what was missing. They found real things. We fixed them. By launch it was as much their process as mine.",
       },
       {
-        question: "What advice would you give someone just getting started?",
+        question: "What do you know now that you wish you'd known when you started the agency?",
         answer:
-          "Be honest about what you're actually producing versus what you think you're producing. That gap is where content engineering lives. Most teams believe they have more consistency and quality control than they do. Read everything you've published in the last six months before you try to fix anything. You can't fix what you can't see.",
+          "That process is a form of care for your team. When I was running everything on talent and hustle, I thought structure would make the work feel less creative. What I found was the opposite — the best creative work in my agency happens when people aren't burning mental energy on logistics. Systems aren't about control. They're about protecting the space where good thinking happens.",
       },
       {
         question: 'What would you be doing if you were not in marketing?',
@@ -391,9 +391,9 @@ export const champions: ChampionStory[] = [
       },
     ],
     pullQuotes: [
-      "Content engineering didn't save my agency. It saved me.",
+      "The systems didn't save my agency. They saved me.",
       "When clients build internal capability because of your work, that's the real win.",
-      "Be honest about what you're actually producing versus what you think you're producing.",
+      "Systems aren't about control. They're about protecting the space where good thinking happens.",
     ],
     heroIllustration: '/illustrations/placeholder-hero.svg',
     detailIllustrations: [

@@ -6,19 +6,6 @@ export default function CTASection() {
       className="my-16 px-8 py-12"
       style={{ backgroundColor: '#002910', borderRadius: 0 }}
     >
-      <p
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '11px',
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          color: '#00ff64',
-          marginBottom: '16px',
-        }}
-      >
-        AirOps Champion Program
-      </p>
-
       <h2
         style={{
           fontFamily: 'var(--font-display)',

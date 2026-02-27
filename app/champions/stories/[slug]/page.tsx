@@ -103,7 +103,6 @@ export default async function StoryPage({ params }: PageProps) {
         {/* Overlaid headline + byline */}
         <div className="absolute bottom-0 left-0 right-0 px-8 pb-10 max-w-4xl mx-auto" style={{ left: 0, right: 0 }}>
           <div className="max-w-3xl mx-auto">
-            <div className="pill-label mb-4">{champion.championLevel} Champion</div>
             <h1
               style={{
                 fontFamily: 'var(--font-display)',
