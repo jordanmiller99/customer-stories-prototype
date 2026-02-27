@@ -4,44 +4,49 @@ export default function NotFound() {
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center px-6 text-center"
-      style={{ backgroundColor: '#0B0B1A' }}
+      style={{ backgroundColor: '#002910' }}
     >
-      {/* Decorative gradient orb */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-3xl opacity-10 pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #7B61FF, transparent)' }}
-        aria-hidden="true"
-      />
-
-      <div className="relative z-10 max-w-md">
-        <p
-          className="text-sm uppercase tracking-widest mb-4 font-medium"
-          style={{ color: '#7B61FF' }}
-        >
+      <div className="max-w-md">
+        <div className="pill-label mb-6 mx-auto" style={{ width: 'fit-content' }}>
           404
-        </p>
+        </div>
         <h1
-          className="font-display text-5xl mb-6 leading-tight"
           style={{
-            color: '#F5F5F7',
-            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
             fontSize: 'clamp(2rem, 5vw, 3rem)',
+            lineHeight: '1.1',
+            letterSpacing: '-0.02em',
+            color: '#ffffff',
+            marginBottom: '16px',
           }}
         >
           This story hasn&rsquo;t been written yet
         </h1>
-        <p className="text-base mb-10" style={{ color: '#6B6B80', lineHeight: '1.7' }}>
-          The page you&rsquo;re looking for doesn&rsquo;t exist. But there are plenty of real
-          stories worth reading.
+        <p
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '16px',
+            lineHeight: '1.6',
+            color: 'rgba(255,255,255,0.6)',
+            marginBottom: '40px',
+          }}
+        >
+          The page you&rsquo;re looking for doesn&rsquo;t exist. But there are plenty of real stories worth reading.
         </p>
 
-        <div className="flex gap-4 justify-center flex-wrap">
+        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link
             href="/champions/stories"
-            className="px-6 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105"
             style={{
-              background: 'linear-gradient(135deg, #7B61FF, #FF3CAC)',
-              color: '#fff',
+              fontFamily: 'var(--font-sans)',
+              fontWeight: 600,
+              fontSize: '14px',
+              backgroundColor: '#00ff64',
+              color: '#000d05',
+              padding: '12px 24px',
+              borderRadius: 0,
+              textDecoration: 'none',
             }}
           >
             See all champion stories
@@ -50,11 +55,16 @@ export default function NotFound() {
             href="https://www.airops.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105"
             style={{
-              backgroundColor: 'rgba(255,255,255,0.06)',
-              color: '#F5F5F7',
-              border: '1px solid rgba(255,255,255,0.12)',
+              fontFamily: 'var(--font-sans)',
+              fontWeight: 500,
+              fontSize: '14px',
+              backgroundColor: 'transparent',
+              color: '#ffffff',
+              padding: '12px 24px',
+              borderRadius: 0,
+              border: '1px solid rgba(255,255,255,0.3)',
+              textDecoration: 'none',
             }}
           >
             Go to AirOps

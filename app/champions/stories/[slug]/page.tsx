@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: absoluteUrl(champion.ogImage),
           width: 1200,
           height: 630,
-          alt: `${champion.name} - ${champion.editorialHeadline}`,
+          alt: `${champion.name} — ${champion.editorialHeadline}`,
         },
       ],
     },
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-const accentCycle = ['purple', 'teal', 'orange', 'pink'] as const
+const PULL_QUOTE_AFTER = [2, 5, 8]
 
 export default async function StoryPage({ params }: PageProps) {
   const { slug } = await params
@@ -67,26 +67,16 @@ export default async function StoryPage({ params }: PageProps) {
   const { prev, next } = getAdjacentChampions(slug)
   const storyUrl = absoluteUrl(`/champions/stories/${slug}`)
 
-  // Distribute pull quotes across the Q&A (at roughly Q3, Q6, Q9)
-  const pullQuotePositions = [2, 5, 8]
-
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#0B0B1A' }}>
-      {/* Top nav */}
+    <div style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
+
+      {/* Nav */}
       <header
-        className="sticky top-0 z-50 px-6 py-4 flex items-center justify-between"
-        style={{
-          backgroundColor: 'rgba(11,11,26,0.92)',
-          backdropFilter: 'blur(12px)',
-          borderBottom: '1px solid rgba(255,255,255,0.05)',
-        }}
+        className="sticky top-0 z-50 flex items-center justify-between px-6 py-4"
+        style={{ backgroundColor: '#ffffff', borderBottom: '1px solid #d4e8da' }}
       >
-        <Link
-          href="/champions/stories"
-          className="inline-flex items-center gap-2 text-sm transition-all duration-200 hover:gap-3"
-          style={{ color: '#7B61FF' }}
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <Link href="/champions/stories" className="link-mono inline-flex items-center gap-2">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           Champion Stories
@@ -96,229 +86,207 @@ export default async function StoryPage({ params }: PageProps) {
           href="https://www.airops.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden sm:block text-xs px-4 py-2 rounded-full font-medium transition-all hover:scale-105"
-          style={{
-            background: 'linear-gradient(135deg, #7B61FF, #FF3CAC)',
-            color: '#fff',
-          }}
+          className="hidden sm:inline-block btn-nav"
         >
           Start a Trial
         </a>
       </header>
 
-      <main className="max-w-3xl mx-auto px-6 pb-24">
-        {/* Hero section */}
-        <section className="pt-16 pb-12">
-          {/* Level badge */}
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-6 uppercase tracking-widest"
-            style={{
-              backgroundColor:
-                champion.championLevel === 'Gold'
-                  ? 'rgba(255,200,50,0.12)'
-                  : 'rgba(0,212,170,0.12)',
-              color: champion.championLevel === 'Gold' ? '#FFC832' : '#00D4AA',
-              border: `1px solid ${champion.championLevel === 'Gold' ? 'rgba(255,200,50,0.25)' : 'rgba(0,212,170,0.25)'}`,
-            }}
-          >
+      <main className="max-w-2xl mx-auto px-6 pb-24">
+
+        {/* Story header */}
+        <section className="pt-16 pb-10" style={{ borderBottom: '1px solid #d4e8da' }}>
+          <div className="pill-label mb-6">
             {champion.championLevel} Champion
           </div>
 
-          {/* Headline */}
           <h1
-            className="font-display leading-tight mb-6"
             style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
-              color: '#F5F5F7',
-              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+              fontFamily: 'var(--font-display)',
+              fontStyle: 'italic',
+              fontSize: 'clamp(2.25rem, 5vw, 4rem)',
+              lineHeight: '1.05',
               letterSpacing: '-0.02em',
+              color: '#000d05',
+              marginBottom: '24px',
             }}
           >
             {champion.editorialHeadline}
           </h1>
 
-          {/* Byline */}
-          <div className="flex items-center gap-4 pb-6" style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-            <div className="flex-1">
-              <p className="font-semibold text-base" style={{ color: '#F5F5F7' }}>
+          <div className="flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <p
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  color: '#000d05',
+                  marginBottom: '3px',
+                }}
+              >
                 {champion.name}
               </p>
-              <p className="text-sm" style={{ color: '#6B6B80' }}>
+              <p
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '11px',
+                  letterSpacing: '0.05em',
+                  color: '#4a6355',
+                }}
+              >
                 {champion.role}, {champion.company} &middot; {formatDate(champion.publishDate)}
               </p>
             </div>
           </div>
 
-          {/* Share buttons (top) */}
-          <div className="pt-5">
+          <div className="mt-6">
             <ShareButtons url={storyUrl} title={champion.editorialHeadline} />
           </div>
         </section>
 
-        {/* Hero illustration placeholder */}
+        {/* Hero portrait */}
         <div
-          className={`relative w-full rounded-2xl overflow-hidden mb-12 ${champion.portraitGradient}`}
-          style={{ aspectRatio: '16/7' }}
+          className={`w-full ${champion.portraitTint}`}
+          style={{ aspectRatio: '3/2', marginTop: '40px', marginBottom: '40px' }}
           role="img"
-          aria-label={`Illustration for ${champion.name}'s story`}
+          aria-label={`Portrait illustration for ${champion.name}`}
         >
-          <div
-            className="absolute inset-0 flex items-center justify-center"
-            style={{ background: 'rgba(0,0,0,0.15)' }}
-          >
-            <div className="text-center">
-              <div
-                className="text-6xl font-display font-bold opacity-30 mb-2"
-                style={{
-                  fontFamily: 'Georgia, "Times New Roman", serif',
-                  color: '#fff',
-                }}
-                aria-hidden="true"
-              >
-                {champion.name.split(' ').map(w => w[0]).join('')}
-              </div>
-              <p className="text-sm font-medium" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                {champion.company}
-              </p>
-            </div>
+          <div className="w-full h-full flex items-end p-8">
+            <span
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontStyle: 'italic',
+                fontSize: 'clamp(80px, 15vw, 140px)',
+                lineHeight: 1,
+                color: 'rgba(255,255,255,0.1)',
+                letterSpacing: '-0.04em',
+                userSelect: 'none',
+              }}
+              aria-hidden="true"
+            >
+              {champion.name.split(' ').map((w) => w[0]).join('')}
+            </span>
           </div>
         </div>
 
         {/* Editorial intro */}
         <section
-          className="mb-12 pb-12"
-          style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}
+          className="pb-10"
+          style={{ borderBottom: '1px solid #d4e8da' }}
           aria-label="Editorial introduction"
         >
           <p
-            className="text-xl leading-relaxed font-display italic"
             style={{
-              color: '#C7C7CC',
-              fontFamily: 'Georgia, "Times New Roman", serif',
-              lineHeight: '1.75',
+              fontFamily: 'var(--font-display)',
+              fontStyle: 'italic',
+              fontSize: '20px',
+              lineHeight: '1.7',
+              color: '#1a2e1f',
             }}
           >
             {champion.introParagraph}
           </p>
         </section>
 
-        {/* Q&A sections */}
-        <article aria-label="Q&A interview">
+        {/* Q&A */}
+        <article aria-label="Interview Q&A" className="pt-10">
           {champion.qa.map((item, index) => {
-            const pullQuoteIndex = pullQuotePositions.indexOf(index)
-            const pullQuote = pullQuoteIndex !== -1
-              ? champion.pullQuotes[pullQuoteIndex]
-              : null
+            const pullQuoteIdx = PULL_QUOTE_AFTER.indexOf(index)
+            const pullQuote = pullQuoteIdx !== -1 ? champion.pullQuotes[pullQuoteIdx] : null
 
             return (
               <div key={index}>
-                {/* Detail illustration placeholder at index 3 */}
                 {index === 3 && (
                   <div
-                    className={`relative w-full rounded-xl overflow-hidden mb-8 ${champion.portraitGradient}`}
-                    style={{ aspectRatio: '21/9', opacity: 0.7 }}
+                    className={`w-full ${champion.portraitTint} mb-10`}
+                    style={{ aspectRatio: '21/9' }}
                     role="img"
-                    aria-label={`Illustration ${1} for ${champion.name}'s story`}
-                  >
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background:
-                          'linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1))',
-                      }}
-                    />
-                  </div>
+                    aria-label={`Illustration for ${champion.name}`}
+                  />
                 )}
 
-                {/* Question */}
-                <div className="mb-8">
+                <div
+                  className="mb-10 pb-10"
+                  style={{ borderBottom: '1px solid #d4e8da' }}
+                >
                   <h2
-                    className="text-lg font-bold mb-4 leading-snug"
-                    style={{ color: '#7B61FF' }}
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '11px',
+                      fontWeight: 500,
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      color: '#008c44',
+                      marginBottom: '14px',
+                    }}
                   >
                     {item.question}
                   </h2>
 
                   <p
-                    className="text-base leading-relaxed"
-                    style={{ color: '#C7C7CC', lineHeight: '1.8' }}
+                    style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '17px',
+                      lineHeight: '1.75',
+                      color: '#000d05',
+                    }}
                   >
                     {item.answer}
                   </p>
                 </div>
 
-                {/* Pull quote after this Q&A if applicable */}
-                {pullQuote && (
-                  <PullQuote
-                    quote={pullQuote}
-                    accentColor={accentCycle[pullQuoteIndex % accentCycle.length]}
-                  />
-                )}
+                {pullQuote && <PullQuote quote={pullQuote} />}
 
-                {/* Second detail illustration after index 6 */}
                 {index === 6 && (
                   <div
-                    className={`relative w-full rounded-xl overflow-hidden mb-8 ${champion.portraitGradient}`}
-                    style={{ aspectRatio: '21/9', opacity: 0.6 }}
+                    className={`w-full ${champion.portraitTint} mb-10`}
+                    style={{ aspectRatio: '21/9', opacity: 0.7 }}
                     role="img"
-                    aria-label={`Illustration ${2} for ${champion.name}'s story`}
-                  >
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background:
-                          'linear-gradient(225deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1))',
-                      }}
-                    />
-                  </div>
+                    aria-label={`Second illustration for ${champion.name}`}
+                  />
                 )}
               </div>
             )
           })}
         </article>
 
-        {/* Share buttons (bottom) */}
-        <div
-          className="py-8 border-t border-b"
-          style={{ borderColor: 'rgba(255,255,255,0.07)' }}
-        >
+        {/* Bottom share */}
+        <div className="py-8" style={{ borderTop: '1px solid #d4e8da' }}>
           <ShareButtons url={storyUrl} title={champion.editorialHeadline} />
         </div>
 
-        {/* CTA section */}
         <CTASection />
 
-        {/* Story navigation */}
         <StoryNav prev={prev} next={next} />
       </main>
 
       <footer
-        className="px-6 py-8 text-center text-xs border-t"
-        style={{
-          color: '#6B6B80',
-          borderColor: 'rgba(255,255,255,0.05)',
-        }}
+        className="px-6 py-8 text-center"
+        style={{ borderTop: '1px solid #d4e8da' }}
       >
-        <div className="flex items-center justify-center gap-4 mb-2">
-          <Link
-            href="/champions/stories"
-            className="transition-colors hover:text-white"
-            style={{ color: '#6B6B80' }}
-          >
+        <div
+          className="flex items-center justify-center gap-4 mb-2"
+        >
+          <Link href="/champions/stories" className="link-mono">
             Champion Stories
           </Link>
-          <span aria-hidden="true">&middot;</span>
-          <a
-            href="https://www.airops.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-white"
-            style={{ color: '#6B6B80' }}
-          >
+          <span aria-hidden="true" style={{ color: '#d4e8da' }}>&middot;</span>
+          <a href="https://www.airops.com" target="_blank" rel="noopener noreferrer" className="link-mono">
             AirOps
           </a>
         </div>
-        <p>&copy; {new Date().getFullYear()} AirOps. All rights reserved.</p>
+        <p
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+            color: '#4a6355',
+          }}
+        >
+          &copy; {new Date().getFullYear()} AirOps
+        </p>
       </footer>
     </div>
   )
