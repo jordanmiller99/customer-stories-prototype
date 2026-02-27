@@ -11,6 +11,7 @@ import PullQuote from '@/components/PullQuote'
 import ShareButtons from '@/components/ShareButtons'
 import StoryNav from '@/components/StoryNav'
 import CTASection from '@/components/CTASection'
+import { PORTRAIT_COMPONENTS } from '@/components/portraits/ChampionPortraits'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -39,14 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url,
       type: 'article',
       publishedTime: champion.publishDate,
-      images: [
-        {
-          url: absoluteUrl(champion.ogImage),
-          width: 1200,
-          height: 630,
-          alt: `${champion.name} — ${champion.editorialHeadline}`,
-        },
-      ],
+      images: [{ url: absoluteUrl(champion.ogImage), width: 1200, height: 630, alt: `${champion.name} — ${champion.editorialHeadline}` }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -66,6 +60,7 @@ export default async function StoryPage({ params }: PageProps) {
 
   const { prev, next } = getAdjacentChampions(slug)
   const storyUrl = absoluteUrl(`/champions/stories/${slug}`)
+  const Portrait = PORTRAIT_COMPONENTS[slug]
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
@@ -82,106 +77,81 @@ export default async function StoryPage({ params }: PageProps) {
           Champion Stories
         </Link>
 
-        <a
-          href="https://www.airops.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden sm:inline-block btn-nav"
-        >
+        <a href="https://www.airops.com" target="_blank" rel="noopener noreferrer" className="hidden sm:inline-block btn-nav">
           Start a Trial
         </a>
       </header>
 
-      <main className="max-w-2xl mx-auto px-6 pb-24">
+      {/* Hero — full-width portrait + overlaid headline */}
+      <div className="relative w-full overflow-hidden" style={{ maxHeight: '70vh', minHeight: '400px' }}>
+        {/* Portrait illustration — full bleed */}
+        {Portrait ? (
+          <Portrait className="w-full" style={{ display: 'block' }} />
+        ) : (
+          <div className={`w-full ${champion.portraitTint}`} style={{ aspectRatio: '16/9' }} />
+        )}
 
-        {/* Story header */}
-        <section className="pt-16 pb-10" style={{ borderBottom: '1px solid #d4e8da' }}>
-          <div className="pill-label mb-6">
-            {champion.championLevel} Champion
-          </div>
-
-          <h1
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
-              fontSize: 'clamp(2.25rem, 5vw, 4rem)',
-              lineHeight: '1.05',
-              letterSpacing: '-0.02em',
-              color: '#000d05',
-              marginBottom: '24px',
-            }}
-          >
-            {champion.editorialHeadline}
-          </h1>
-
-          <div className="flex items-start justify-between gap-4 flex-wrap">
-            <div>
-              <p
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  color: '#000d05',
-                  marginBottom: '3px',
-                }}
-              >
-                {champion.name}
-              </p>
-              <p
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
-                  letterSpacing: '0.05em',
-                  color: '#4a6355',
-                }}
-              >
-                {champion.role}, {champion.company} &middot; {formatDate(champion.publishDate)}
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-6">
-            <ShareButtons url={storyUrl} title={champion.editorialHeadline} />
-          </div>
-        </section>
-
-        {/* Hero portrait */}
+        {/* Gradient overlay for text legibility */}
         <div
-          className={`w-full ${champion.portraitTint}`}
-          style={{ aspectRatio: '3/2', marginTop: '40px', marginBottom: '40px' }}
-          role="img"
-          aria-label={`Portrait illustration for ${champion.name}`}
-        >
-          <div className="w-full h-full flex items-end p-8">
-            <span
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)',
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Overlaid headline + byline */}
+        <div className="absolute bottom-0 left-0 right-0 px-8 pb-10 max-w-4xl mx-auto" style={{ left: 0, right: 0 }}>
+          <div className="max-w-3xl mx-auto">
+            <div className="pill-label mb-4">{champion.championLevel} Champion</div>
+            <h1
               style={{
                 fontFamily: 'var(--font-display)',
                 fontStyle: 'italic',
-                fontSize: 'clamp(80px, 15vw, 140px)',
-                lineHeight: 1,
-                color: 'rgba(255,255,255,0.1)',
-                letterSpacing: '-0.04em',
-                userSelect: 'none',
+                fontSize: 'clamp(2rem, 5vw, 3.75rem)',
+                lineHeight: '1.05',
+                letterSpacing: '-0.025em',
+                color: '#ffffff',
+                marginBottom: '16px',
+                textShadow: '0 2px 20px rgba(0,0,0,0.5)',
               }}
-              aria-hidden="true"
             >
-              {champion.name.split(' ').map((w) => w[0]).join('')}
-            </span>
+              {champion.editorialHeadline}
+            </h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+              <div>
+                <span style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', fontWeight: 600, color: '#ffffff' }}>
+                  {champion.name}
+                </span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(255,255,255,0.65)', marginLeft: '12px', letterSpacing: '0.05em' }}>
+                  {champion.role}, {champion.company} &middot; {formatDate(champion.publishDate)}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Editorial intro */}
+      <main className="max-w-2xl mx-auto px-6 pb-24">
+
+        {/* Share + divider */}
+        <div className="py-6" style={{ borderBottom: '1px solid #d4e8da' }}>
+          <ShareButtons url={storyUrl} title={champion.editorialHeadline} />
+        </div>
+
+        {/* Editorial intro — with drop cap */}
         <section
-          className="pb-10"
+          className="py-10"
           style={{ borderBottom: '1px solid #d4e8da' }}
           aria-label="Editorial introduction"
         >
           <p
+            className="drop-cap"
             style={{
               fontFamily: 'var(--font-display)',
               fontStyle: 'italic',
               fontSize: '20px',
-              lineHeight: '1.7',
+              lineHeight: '1.75',
               color: '#1a2e1f',
             }}
           >
@@ -189,47 +159,108 @@ export default async function StoryPage({ params }: PageProps) {
           </p>
         </section>
 
+        {/* Q + A header */}
+        <div
+          className="flex items-baseline gap-4 py-8"
+          style={{ borderBottom: '2px solid #000d05' }}
+          aria-hidden="true"
+        >
+          <span
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontStyle: 'italic',
+              fontSize: '64px',
+              lineHeight: 1,
+              letterSpacing: '-0.04em',
+              color: '#008c44',
+            }}
+          >
+            Q
+          </span>
+          <span
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '20px',
+              color: '#d4e8da',
+              marginBottom: '4px',
+            }}
+          >
+            +
+          </span>
+          <span
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontStyle: 'italic',
+              fontSize: '64px',
+              lineHeight: 1,
+              letterSpacing: '-0.04em',
+              color: '#000d05',
+            }}
+          >
+            A
+          </span>
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: '#4a6355',
+              marginBottom: '6px',
+            }}
+          >
+            {champion.name}
+          </span>
+        </div>
+
         {/* Q&A */}
-        <article aria-label="Interview Q&A" className="pt-10">
+        <article aria-label="Interview Q&A">
           {champion.qa.map((item, index) => {
             const pullQuoteIdx = PULL_QUOTE_AFTER.indexOf(index)
             const pullQuote = pullQuoteIdx !== -1 ? champion.pullQuotes[pullQuoteIdx] : null
 
             return (
               <div key={index}>
-                {index === 3 && (
+                {/* Mid-story portrait break at Q4 */}
+                {index === 3 && Portrait && (
                   <div
-                    className={`w-full ${champion.portraitTint} mb-10`}
-                    style={{ aspectRatio: '21/9' }}
+                    className="w-full overflow-hidden -mx-6 my-10"
+                    style={{ width: 'calc(100% + 48px)' }}
                     role="img"
                     aria-label={`Illustration for ${champion.name}`}
-                  />
+                  >
+                    <Portrait className="w-full" style={{ maxHeight: '280px', objectFit: 'cover', display: 'block' }} />
+                  </div>
                 )}
 
-                <div
-                  className="mb-10 pb-10"
-                  style={{ borderBottom: '1px solid #d4e8da' }}
-                >
-                  <h2
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '11px',
-                      fontWeight: 500,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      color: '#008c44',
-                      marginBottom: '14px',
-                    }}
-                  >
-                    {item.question}
-                  </h2>
+                {/* Q&A item */}
+                <div className="py-8" style={{ borderBottom: '1px solid #d4e8da' }}>
+                  {/* Large decorative Q */}
+                  <div className="flex gap-4 items-start mb-3">
+                    <span className="qa-question-label" aria-hidden="true">Q.</span>
+                    <h2
+                      style={{
+                        fontFamily: 'var(--font-display)',
+                        fontStyle: 'italic',
+                        fontSize: '18px',
+                        lineHeight: '1.4',
+                        color: '#000d05',
+                        paddingTop: '14px',
+                        flex: 1,
+                      }}
+                    >
+                      {item.question}
+                    </h2>
+                  </div>
 
+                  {/* Answer */}
                   <p
                     style={{
                       fontFamily: 'var(--font-sans)',
                       fontSize: '17px',
                       lineHeight: '1.75',
-                      color: '#000d05',
+                      color: '#1a2e1f',
+                      paddingLeft: '0',
                     }}
                   >
                     {item.answer}
@@ -238,13 +269,16 @@ export default async function StoryPage({ params }: PageProps) {
 
                 {pullQuote && <PullQuote quote={pullQuote} />}
 
-                {index === 6 && (
+                {/* Second portrait break at Q7 */}
+                {index === 6 && Portrait && (
                   <div
-                    className={`w-full ${champion.portraitTint} mb-10`}
-                    style={{ aspectRatio: '21/9', opacity: 0.7 }}
+                    className="w-full overflow-hidden -mx-6 my-10"
+                    style={{ width: 'calc(100% + 48px)' }}
                     role="img"
                     aria-label={`Second illustration for ${champion.name}`}
-                  />
+                  >
+                    <Portrait className="w-full" style={{ maxHeight: '220px', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+                  </div>
                 )}
               </div>
             )
@@ -257,34 +291,16 @@ export default async function StoryPage({ params }: PageProps) {
         </div>
 
         <CTASection />
-
         <StoryNav prev={prev} next={next} />
       </main>
 
-      <footer
-        className="px-6 py-8 text-center"
-        style={{ borderTop: '1px solid #d4e8da' }}
-      >
-        <div
-          className="flex items-center justify-center gap-4 mb-2"
-        >
-          <Link href="/champions/stories" className="link-mono">
-            Champion Stories
-          </Link>
-          <span aria-hidden="true" style={{ color: '#d4e8da' }}>&middot;</span>
-          <a href="https://www.airops.com" target="_blank" rel="noopener noreferrer" className="link-mono">
-            AirOps
-          </a>
+      <footer className="px-6 py-8 text-center" style={{ borderTop: '1px solid #d4e8da' }}>
+        <div className="flex items-center justify-center gap-4 mb-2">
+          <Link href="/champions/stories" className="link-mono">Champion Stories</Link>
+          <span style={{ color: '#d4e8da' }}>&middot;</span>
+          <a href="https://www.airops.com" target="_blank" rel="noopener noreferrer" className="link-mono">AirOps</a>
         </div>
-        <p
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase',
-            color: '#4a6355',
-          }}
-        >
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: '#4a6355' }}>
           &copy; {new Date().getFullYear()} AirOps
         </p>
       </footer>

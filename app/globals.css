@@ -120,6 +120,30 @@ body {
 }
 .nav-link:hover { border-color: #008c44; }
 
+/* Drop cap — editorial intro first letter */
+.drop-cap::first-letter {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 5.2em;
+  line-height: 0.78;
+  float: left;
+  margin-right: 6px;
+  margin-top: 6px;
+  color: #008c44;
+}
+
+/* Q&A — large decorative "Q" prefix */
+.qa-question-label {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #008c44;
+  margin-bottom: -8px;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #F8FFFA; }
