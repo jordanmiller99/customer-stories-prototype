@@ -156,6 +156,53 @@ body {
   margin-bottom: -8px;
 }
 
+/* ─── EDITORIAL STORY PAGE STYLES ───────────────────────────────────────── */
+
+/* Two-column Q&A grid — stacks on mobile, splits on desktop */
+.qa-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid #DDD4C2;
+}
+
+@media (min-width: 768px) {
+  .qa-grid {
+    grid-template-columns: 5fr 7fr;
+    column-gap: 56px;
+    row-gap: 0;
+    align-items: start;
+  }
+}
+
+/* Ink-stamp Q. label — misregistered color layers via text-shadow */
+.ink-stamp {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #C4722A;
+  text-shadow:
+    3px 5px 0 rgba(107, 174, 138, 0.4),
+    -1px -2px 0 rgba(107, 174, 138, 0.2);
+  user-select: none;
+  /* Slight rotation — feels stamped, not typeset */
+  transform: rotate(-1.2deg);
+  transform-origin: left center;
+}
+
+/* Oversized chapter/issue label */
+.issue-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #C4722A;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #F8FFFA; }
