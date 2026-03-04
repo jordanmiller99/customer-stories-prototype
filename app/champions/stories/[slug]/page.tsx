@@ -72,17 +72,12 @@ export default async function StoryPage({ params }: PageProps) {
   const storyUrl = absoluteUrl(`/champions/stories/${slug}`)
   const Portrait = PORTRAIT_COMPONENTS[slug]
 
-  // Issue numbers per champion for the cover reveal
-  const issueNumbers: Record<string, string> = {
-    'bri-callahan':   '01',
-    'marcus-reid':    '02',
-    'priya-menon':    '03',
-    'deshawn-okafor': '04',
-    'sofia-reyes':    '05',
-  }
-
   return (
-    <PageReveal issue={issueNumbers[slug] ?? '01'}>
+    <PageReveal
+      pullQuote={champion.pullQuotes[0]}
+      name={champion.name}
+      role={champion.role}
+    >
       <div style={{ minHeight: '100vh', backgroundColor: CREAM }}>
 
         {/* ── HEADER — dark, minimal, no CTA ── */}
@@ -203,27 +198,6 @@ export default async function StoryPage({ params }: PageProps) {
               opacity: 0.8,
             }}
           />
-
-          {/* Issue number — top right, very large, ghosted */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              top: '24px',
-              right: '40px',
-              fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
-              fontSize: 'clamp(120px, 20vw, 260px)',
-              lineHeight: '1',
-              letterSpacing: '-0.06em',
-              color: CREAM,
-              opacity: 0.04,
-              userSelect: 'none',
-              pointerEvents: 'none',
-            }}
-          >
-            {issueNumbers[slug] ?? '01'}
-          </div>
 
           {/* Hero text block */}
           <div

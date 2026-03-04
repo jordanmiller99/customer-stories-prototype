@@ -203,6 +203,13 @@ body {
   color: #C4722A;
 }
 
+/* Page-turn shadow cast on content beneath */
+@keyframes page-shadow-fade {
+  0%   { opacity: 0; }
+  25%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #F8FFFA; }
