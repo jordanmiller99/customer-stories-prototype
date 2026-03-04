@@ -13,6 +13,7 @@ import StoryNav from '@/components/StoryNav'
 import CTASection from '@/components/CTASection'
 import PageReveal from '@/components/PageReveal'
 import { PORTRAIT_COMPONENTS } from '@/components/portraits/ChampionPortraits'
+import { SCENE_COMPONENTS } from '@/components/scenes/ChampionScenes'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -71,6 +72,7 @@ export default async function StoryPage({ params }: PageProps) {
   const { prev, next } = getAdjacentChampions(slug)
   const storyUrl = absoluteUrl(`/champions/stories/${slug}`)
   const Portrait = PORTRAIT_COMPONENTS[slug]
+  const [SceneA, SceneB] = SCENE_COMPONENTS[slug] ?? [null, null]
 
   return (
     <PageReveal
@@ -398,21 +400,19 @@ export default async function StoryPage({ params }: PageProps) {
 
               return (
                 <div key={index}>
-                  {/* Mid-story portrait break at Q4 */}
-                  {index === 3 && Portrait && (
+                  {/* Scene break at Q4 — environmental illustration */}
+                  {index === 3 && SceneA && (
                     <div
                       style={{
                         width: '100vw',
                         marginLeft: 'calc(50% - 50vw)',
-                        overflow: 'hidden',
-                        maxHeight: '380px',
                         marginTop: '16px',
                         marginBottom: '16px',
                       }}
                       role="img"
-                      aria-label={`Illustration: ${champion.name}`}
+                      aria-label="Editorial illustration"
                     >
-                      <Portrait style={{ width: '100%', display: 'block', maxHeight: '380px' }} />
+                      <SceneA style={{ width: '100%', display: 'block' }} />
                     </div>
                   )}
 
@@ -465,28 +465,19 @@ export default async function StoryPage({ params }: PageProps) {
 
                   {pullQuote && <PullQuote quote={pullQuote} accent={ACCENT} />}
 
-                  {/* Second portrait break at Q7 */}
-                  {index === 6 && Portrait && (
+                  {/* Scene break at Q7 — second editorial illustration */}
+                  {index === 6 && SceneB && (
                     <div
                       style={{
                         width: '100vw',
                         marginLeft: 'calc(50% - 50vw)',
-                        overflow: 'hidden',
-                        maxHeight: '300px',
                         marginTop: '16px',
                         marginBottom: '16px',
                       }}
                       role="img"
-                      aria-label={`Illustration: ${champion.name}`}
+                      aria-label="Editorial illustration"
                     >
-                      <Portrait
-                        style={{
-                          width: '100%',
-                          display: 'block',
-                          maxHeight: '300px',
-                          objectPosition: 'top',
-                        }}
-                      />
+                      <SceneB style={{ width: '100%', display: 'block' }} />
                     </div>
                   )}
                 </div>
