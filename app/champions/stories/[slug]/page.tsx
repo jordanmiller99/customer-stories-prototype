@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const champion = getChampionBySlug(slug)
   if (!champion) return {}
 
-  const title = `${champion.editorialHeadline} | Content Engineers`
+  const title = `${champion.editorialHeadline} | Meet the Content Engineers`
   const description = champion.introParagraph.slice(0, 160)
   const url = absoluteUrl(`/champions/stories/${slug}`)
 

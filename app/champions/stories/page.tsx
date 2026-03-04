@@ -4,11 +4,11 @@ import { getPublishedChampions } from '@/data/champions'
 import ChampionCard from '@/components/ChampionCard'
 
 export const metadata: Metadata = {
-  title: 'Champion Stories',
+  title: 'Meet the Content Engineers',
   description:
     'Meet the marketers redefining what\'s possible with content engineering. Real stories, real careers, real results.',
   openGraph: {
-    title: 'Champion Stories | AirOps',
+    title: 'Meet the Content Engineers | AirOps',
     description:
       'Meet the marketers redefining what\'s possible with content engineering. Real stories, real careers, real results.',
     type: 'website',
@@ -61,7 +61,7 @@ export default function ChampionsStoriesPage() {
           aria-label="Hero"
         >
           <div className="max-w-4xl mx-auto">
-            <div className="pill-label mb-8">Champion Stories</div>
+            <div className="pill-label mb-8">Content Engineers</div>
 
             <h1
               style={{
@@ -74,7 +74,7 @@ export default function ChampionsStoriesPage() {
                 marginBottom: '24px',
               }}
             >
-              Champion<br />Stories
+              Meet the<br />Content<br />Engineers
             </h1>
 
             <p

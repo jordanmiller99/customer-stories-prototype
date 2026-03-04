@@ -3,615 +3,496 @@
 // patterns, intentional color misregistration on key shapes, grain texture overlay.
 // Each portrait is a different "print run" of the same editorial series.
 
-type PortraitProps = { className?: string; style?: React.CSSProperties }
+import { ComponentType } from 'react'
 
-// Shared risograph palette
-const STONE  = '#1A1310'   // key plate — hair, outlines, dark areas
-const AMBER  = '#C4722A'   // warm ink — faces, skin tones
-const SAGE   = '#7BAE8A'   // cool ink — shadow register, accents
-const CREAM  = '#F6F1E9'   // paper / highlights
+type PortraitProps = {
+  className?: string
+  style?: React.CSSProperties
+}
 
-// ─── BRI CALLAHAN ────────────────────────────────────────────────────────────
-// Teacher turned content lead. Big curly hair, round glasses, warm and bookish.
-export function BriCallahanPortrait({ className, style }: PortraitProps) {
+// Risograph portrait palette
+const STONE  = '#1A1310'
+const AMBER  = '#C4722A'
+const SAGE   = '#7BAE8A'
+const CREAM  = '#F6F1E9'
+
+// ─── Lucy Hoyle ──────────────────────────────────────────────────────────────
+// Long flowing blonde/golden hair, warm smile, gold statement earrings, green top
+function LucyHoylePortrait({ className, style }: PortraitProps = {}) {
   return (
-    <svg
-      viewBox="0 0 800 600"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      style={style}
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 480 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+      style={{ width: '100%', height: '100%', display: 'block' }}>
       <defs>
-        {/* Halftone shadow dots */}
-        <pattern id="ht-bri" patternUnits="userSpaceOnUse" width="11" height="11">
-          <circle cx="5.5" cy="5.5" r="2.8" fill={STONE} />
+        <pattern id="lh-dots" patternUnits="userSpaceOnUse" width="6" height="6">
+          <circle cx="3" cy="3" r="1.2" fill={AMBER} opacity="0.35" />
         </pattern>
-        {/* Fine grain noise */}
-        <pattern id="grain-bri" patternUnits="userSpaceOnUse" width="5" height="5">
-          <rect x="1" y="0" width="1" height="1" fill={STONE} opacity="0.3" />
-          <rect x="4" y="2" width="1" height="1" fill={STONE} opacity="0.2" />
-          <rect x="0" y="4" width="1" height="1" fill={STONE} opacity="0.25" />
-          <rect x="3" y="3" width="1" height="1" fill={STONE} opacity="0.18" />
+        <pattern id="lh-grain" patternUnits="userSpaceOnUse" width="4" height="4">
+          <circle cx="2" cy="2" r="0.6" fill={STONE} opacity="0.12" />
         </pattern>
-        {/* Face clipping path for halftone shadow area */}
-        <clipPath id="face-clip-bri">
-          <ellipse cx="400" cy="358" rx="118" ry="132" />
-        </clipPath>
-        {/* Hair clip */}
-        <clipPath id="hair-clip-bri">
-          <ellipse cx="400" cy="255" rx="168" ry="178" />
-        </clipPath>
       </defs>
 
-      {/* Paper background */}
-      <rect width="800" height="600" fill={STONE} />
+      {/* Background */}
+      <rect width="480" height="560" fill={CREAM} />
+      <rect width="480" height="560" fill="url(#lh-grain)" />
 
-      {/* Sage ink blob — left background wash */}
-      <ellipse cx="100" cy="380" rx="200" ry="260" fill={SAGE} opacity="0.13" />
+      {/* Amber vertical rule */}
+      <rect x="16" y="0" width="3" height="560" fill={AMBER} opacity="0.5" />
 
-      {/* Amber ink wash — top-right */}
-      <ellipse cx="680" cy="120" rx="220" ry="180" fill={AMBER} opacity="0.1" />
-
-      {/* Halftone dot field — upper right quadrant, creates depth */}
-      <rect x="480" y="0" width="320" height="320" fill="url(#ht-bri)" opacity="0.07" />
-
-      {/* ── BODY / SHOULDERS ── */}
-      {/* Sage registration shadow (offset +5px, +6px) */}
-      <ellipse cx="405" cy="686" rx="235" ry="115" fill={SAGE} opacity="0.45" />
-      {/* Amber primary body */}
-      <ellipse cx="400" cy="680" rx="235" ry="115" fill={AMBER} />
-
-      {/* Blouse collar — cream */}
-      <polygon points="350,530 400,588 450,530 472,610 328,610" fill={CREAM} opacity="0.92" />
-      {/* Collar shadow register — sage */}
-      <polygon points="354,534 404,592 453,533 474,612 330,612" fill={SAGE} opacity="0.25" />
+      {/* Body — green silk blouse (Carta green echo) */}
+      <ellipse cx="244" cy="490" rx="165" ry="100" fill={SAGE} opacity="0.6" transform="translate(5,6)" />
+      <ellipse cx="244" cy="490" rx="165" ry="100" fill="#3A7A4A" />
 
       {/* Neck */}
-      <rect x="372" y="502" width="56" height="68" rx="6" fill={AMBER} />
+      <rect x="213" y="320" width="32" height="60" rx="8" fill={SAGE} opacity="0.4" transform="translate(3,4)" />
+      <rect x="213" y="320" width="32" height="60" rx="8" fill={CREAM} />
 
-      {/* ── HAIR — voluminous curls ── */}
-      {/* Sage shadow register (offset) */}
-      <g transform="translate(5, 7)">
-        <ellipse cx="400" cy="258" rx="168" ry="175" fill={SAGE} opacity="0.35" />
-        <circle cx="238" cy="316" r="98" fill={SAGE} opacity="0.3" />
-        <circle cx="562" cy="316" r="98" fill={SAGE} opacity="0.3" />
-        <circle cx="400" cy="138" r="92" fill={SAGE} opacity="0.3" />
-      </g>
-      {/* Stone primary hair */}
-      <ellipse cx="400" cy="258" rx="168" ry="175" fill={STONE} />
-      <circle cx="238" cy="316" r="98" fill={STONE} />
-      <circle cx="562" cy="316" r="98" fill={STONE} />
-      <circle cx="310" cy="178" r="82" fill={STONE} />
-      <circle cx="490" cy="178" r="82" fill={STONE} />
-      <circle cx="400" cy="138" r="92" fill={STONE} />
-      <circle cx="348" cy="155" r="62" fill={STONE} />
-      <circle cx="452" cy="155" r="62" fill={STONE} />
-      {/* Subtle amber highlight on hair crown */}
-      <ellipse cx="400" cy="162" rx="80" ry="50" fill={AMBER} opacity="0.12" />
+      {/* Hair — long flowing blonde, fills behind face */}
+      <path d="M 148 180 Q 130 300 140 430 Q 160 500 200 520 L 280 520 Q 320 500 340 430 Q 350 300 332 180 Q 290 140 240 130 Q 190 140 148 180 Z"
+        fill={AMBER} opacity="0.5" transform="translate(4,6)" />
+      <path d="M 148 180 Q 130 300 140 430 Q 160 500 200 520 L 280 520 Q 320 500 340 430 Q 350 300 332 180 Q 290 140 240 130 Q 190 140 148 180 Z"
+        fill="#D4A843" />
+      {/* Hair highlights */}
+      <path d="M 165 190 Q 150 310 158 420 Q 170 370 175 290 Q 178 240 175 190 Z"
+        fill={AMBER} opacity="0.3" />
+      <path d="M 290 190 Q 305 240 308 290 Q 312 370 320 420 Q 328 310 315 190 Z"
+        fill={AMBER} opacity="0.3" />
+      <ellipse cx="175" cy="300" rx="30" ry="60" fill="url(#lh-dots)" opacity="0.5" />
+      <ellipse cx="305" cy="300" rx="30" ry="60" fill="url(#lh-dots)" opacity="0.5" />
 
-      {/* ── FACE ── */}
-      {/* Sage misregistration shadow — offset */}
-      <ellipse cx="404" cy="362" rx="118" ry="132" fill={SAGE} opacity="0.6" />
-      {/* Amber primary face */}
-      <ellipse cx="400" cy="358" rx="118" ry="132" fill={AMBER} />
+      {/* Face */}
+      <ellipse cx="244" cy="215" rx="92" ry="112" fill={SAGE} opacity="0.35" transform="translate(4,5)" />
+      <ellipse cx="240" cy="210" rx="92" ry="112" fill={CREAM} />
 
-      {/* Halftone shadow — right side of face */}
-      <rect
-        x="430" y="260" width="100" height="240"
-        fill="url(#ht-bri)" opacity="0.28"
-        clipPath="url(#face-clip-bri)"
-      />
-
-      {/* Ears */}
-      <ellipse cx="282" cy="358" rx="18" ry="26" fill={AMBER} />
-      <ellipse cx="518" cy="358" rx="18" ry="26" fill={AMBER} />
-
-      {/* ── GLASSES — cream frames, ink-stamp style ── */}
-      {/* Sage misregistration of glasses */}
-      <rect x="335" y="358" width="47" height="30" rx="4" fill="none" stroke={SAGE} strokeWidth="5" opacity="0.45" transform="translate(3,4)" />
-      <rect x="418" y="358" width="47" height="30" rx="4" fill="none" stroke={SAGE} strokeWidth="5" opacity="0.45" transform="translate(3,4)" />
-      {/* Amber primary glasses */}
-      <rect x="335" y="358" width="47" height="30" rx="4" fill="none" stroke={AMBER} strokeWidth="2" opacity="0.4" />
-      {/* Stone key glasses */}
-      <rect x="335" y="358" width="47" height="30" rx="4" fill="none" stroke={STONE} strokeWidth="4" />
-      <rect x="418" y="358" width="47" height="30" rx="4" fill="none" stroke={STONE} strokeWidth="4" />
-      <line x1="382" y1="373" x2="418" y2="373" stroke={STONE} strokeWidth="3.5" />
-      <line x1="318" y1="369" x2="335" y2="369" stroke={STONE} strokeWidth="3.5" />
-      <line x1="465" y1="369" x2="482" y2="369" stroke={STONE} strokeWidth="3.5" />
-
-      {/* ── EYES ── */}
-      <ellipse cx="358" cy="373" rx="14" ry="10" fill={STONE} />
-      <ellipse cx="441" cy="373" rx="14" ry="10" fill={STONE} />
-      <circle cx="362" cy="370" r="3.5" fill={CREAM} />
-      <circle cx="445" cy="370" r="3.5" fill={CREAM} />
+      {/* Eyes */}
+      <ellipse cx="210" cy="200" rx="14" ry="9" fill={STONE} />
+      <ellipse cx="270" cy="200" rx="14" ry="9" fill={STONE} />
+      <circle cx="207" cy="199" r="4" fill={CREAM} />
+      <circle cx="267" cy="199" r="4" fill={CREAM} />
+      <ellipse cx="210" cy="195" rx="16" ry="5" fill={STONE} opacity="0.7" />
+      <ellipse cx="270" cy="195" rx="16" ry="5" fill={STONE} opacity="0.7" />
 
       {/* Nose */}
-      <path d="M 392 400 Q 400 420 408 400" stroke={STONE} strokeWidth="3" fill="none" strokeLinecap="round" />
+      <path d="M 237 210 Q 233 240 228 248 Q 236 254 252 248 Q 247 240 243 210 Z" fill={AMBER} opacity="0.35" />
 
       {/* Smile */}
-      <path d="M 375 440 Q 400 460 425 440" stroke={STONE} strokeWidth="3.5" fill="none" strokeLinecap="round" />
+      <path d="M 218 270 Q 240 286 262 270" stroke={STONE} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M 220 272 Q 240 283 260 272" stroke={AMBER} strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.6" />
 
-      {/* ── PROP: small stack of books — bottom left ── */}
-      <rect x="44" y="482" width="88" height="14" rx="2" fill={CREAM} opacity="0.85" />
-      <rect x="48" y="466" width="80" height="14" rx="2" fill={SAGE} opacity="0.7" />
-      <rect x="44" y="452" width="84" height="12" rx="2" fill={AMBER} opacity="0.65" />
-      {/* Book spines — vertical lines */}
-      <line x1="60" y1="452" x2="60" y2="496" stroke={STONE} strokeWidth="1.5" opacity="0.5" />
-      <line x1="76" y1="466" x2="76" y2="496" stroke={STONE} strokeWidth="1.5" opacity="0.5" />
+      {/* Gold statement earrings */}
+      <circle cx="152" cy="218" r="7" fill={AMBER} />
+      <ellipse cx="152" cy="232" rx="5" ry="9" fill={AMBER} opacity="0.9" />
+      <circle cx="330" cy="218" r="7" fill={AMBER} />
+      <ellipse cx="330" cy="232" rx="5" ry="9" fill={AMBER} opacity="0.9" />
 
-      {/* Grain overlay */}
-      <rect width="800" height="600" fill="url(#grain-bri)" opacity="0.55" />
+      {/* Circle pendant necklace */}
+      <circle cx="240" cy="355" r="10" stroke={AMBER} strokeWidth="2" fill="none" opacity="0.7" />
+
+      {/* Face grain overlay */}
+      <ellipse cx="240" cy="210" rx="92" ry="112" fill="url(#lh-grain)" opacity="0.6" />
+
+      {/* Bottom amber rule */}
+      <rect x="0" y="548" width="480" height="4" fill={AMBER} opacity="0.6" />
     </svg>
   )
 }
 
-// ─── MARCUS REID ─────────────────────────────────────────────────────────────
-// Data skeptic, SEO lead. Short close-cut hair, strong jaw, slight skeptical brow.
-export function MarcusReidPortrait({ className, style }: PortraitProps) {
+// ─── Connor Beaulieu ──────────────────────────────────────────────────────────
+// Artistic interpretation — legal/data visual language, dark stone palette
+function ConnorBeaulieuPortrait({ className, style }: PortraitProps = {}) {
   return (
-    <svg
-      viewBox="0 0 800 600"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      style={style}
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 480 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+      style={{ width: '100%', height: '100%', display: 'block' }}>
       <defs>
-        <pattern id="ht-marcus" patternUnits="userSpaceOnUse" width="10" height="10">
-          <circle cx="5" cy="5" r="2.4" fill={STONE} />
+        <pattern id="cb-grid" patternUnits="userSpaceOnUse" width="24" height="24">
+          <line x1="0" y1="0" x2="24" y2="0" stroke={SAGE} strokeWidth="0.5" opacity="0.3" />
+          <line x1="0" y1="0" x2="0" y2="24" stroke={SAGE} strokeWidth="0.5" opacity="0.3" />
         </pattern>
-        <pattern id="grain-marcus" patternUnits="userSpaceOnUse" width="5" height="5">
-          <rect x="2" y="0" width="1" height="1" fill={STONE} opacity="0.28" />
-          <rect x="0" y="3" width="1" height="1" fill={STONE} opacity="0.22" />
-          <rect x="4" y="4" width="1" height="1" fill={STONE} opacity="0.2" />
-          <rect x="1" y="2" width="1" height="1" fill={STONE} opacity="0.16" />
+        <pattern id="cb-dots" patternUnits="userSpaceOnUse" width="8" height="8">
+          <circle cx="4" cy="4" r="1.5" fill={AMBER} opacity="0.25" />
         </pattern>
-        <clipPath id="face-clip-marcus">
-          <ellipse cx="400" cy="366" rx="122" ry="136" />
-        </clipPath>
       </defs>
 
-      <rect width="800" height="600" fill={STONE} />
+      {/* Background — dark stone */}
+      <rect width="480" height="560" fill={STONE} />
+      <rect width="480" height="560" fill="url(#cb-grid)" />
 
-      {/* Sage background wash — diagonal */}
-      <ellipse cx="650" cy="480" rx="280" ry="240" fill={SAGE} opacity="0.11" />
-      <ellipse cx="150" cy="100" rx="180" ry="150" fill={AMBER} opacity="0.08" />
+      {/* Document lines — LegalZoom reference */}
+      <rect x="340" y="60" width="80" height="10" rx="2" fill={CREAM} opacity="0.06" />
+      <rect x="340" y="78" width="64" height="10" rx="2" fill={CREAM} opacity="0.06" />
+      <rect x="340" y="96" width="72" height="10" rx="2" fill={CREAM} opacity="0.06" />
+      <rect x="340" y="114" width="55" height="10" rx="2" fill={CREAM} opacity="0.06" />
 
-      {/* Bar-chart data marks — top right corner, his SEO world */}
-      <rect x="620" y="60" width="22" height="110" fill={CREAM} opacity="0.08" />
-      <rect x="652" y="88" width="22" height="82" fill={SAGE} opacity="0.12" />
-      <rect x="684" y="44" width="22" height="126" fill={CREAM} opacity="0.06" />
-      <rect x="716" y="72" width="22" height="98" fill={AMBER} opacity="0.1" />
-      {/* Baseline */}
-      <line x1="614" y1="172" x2="744" y2="172" stroke={CREAM} strokeWidth="1" opacity="0.12" />
-
-      {/* ── BODY ── */}
-      <g transform="translate(5, 6)">
-        <ellipse cx="400" cy="686" rx="248" ry="118" fill={SAGE} opacity="0.4" />
-      </g>
-      <ellipse cx="400" cy="680" rx="248" ry="118" fill={STONE} />
-
-      {/* Shirt collar — cream */}
-      <polygon points="352,528 400,596 448,528 468,614 332,614" fill={CREAM} opacity="0.85" />
-      {/* Jacket lapels — stone */}
-      <polygon points="352,528 332,614 208,614 268,524" fill={STONE} />
-      <polygon points="448,528 468,614 592,614 532,524" fill={STONE} />
+      {/* Shoulders */}
+      <ellipse cx="244" cy="500" rx="170" ry="95" fill={SAGE} opacity="0.4" transform="translate(4,5)" />
+      <ellipse cx="240" cy="495" rx="170" ry="95" fill="#2A3D30" />
 
       {/* Neck */}
-      <rect x="374" y="505" width="52" height="62" rx="5" fill={AMBER} />
+      <rect x="216" y="318" width="28" height="55" rx="7" fill={CREAM} opacity="0.85" transform="translate(3,4)" />
+      <rect x="213" y="315" width="28" height="55" rx="7" fill="#D4B090" />
 
-      {/* ── HAIR — short, close-cropped ── */}
-      {/* Sage register (offset) */}
-      <g transform="translate(4, 5)">
-        <ellipse cx="400" cy="270" rx="135" ry="145" fill={SAGE} opacity="0.3" />
-        <ellipse cx="400" cy="196" rx="126" ry="68" fill={SAGE} opacity="0.3" />
-      </g>
-      <ellipse cx="400" cy="270" rx="135" ry="145" fill={STONE} />
-      <ellipse cx="400" cy="196" rx="126" ry="68" fill={STONE} />
-      {/* Hairline edge (slight forehead show) */}
-      <ellipse cx="400" cy="268" rx="122" ry="52" fill={AMBER} opacity="0.9" />
+      {/* Hair — short dark professional */}
+      <ellipse cx="244" cy="170" rx="98" ry="80" fill={SAGE} opacity="0.3" transform="translate(4,5)" />
+      <ellipse cx="240" cy="165" rx="98" ry="80" fill={STONE} />
+      <path d="M 145 185 Q 145 130 240 120 Q 335 130 335 185 Q 335 140 240 132 Q 145 140 145 185 Z"
+        fill={STONE} />
 
-      {/* ── FACE ── */}
-      {/* Sage misregistration */}
-      <ellipse cx="405" cy="370" rx="122" ry="136" fill={SAGE} opacity="0.55" />
-      {/* Amber primary */}
-      <ellipse cx="400" cy="366" rx="122" ry="136" fill={AMBER} />
+      {/* Face */}
+      <ellipse cx="244" cy="218" rx="93" ry="108" fill={SAGE} opacity="0.3" transform="translate(4,5)" />
+      <ellipse cx="240" cy="214" rx="93" ry="108" fill="#D4B090" />
+      <ellipse cx="240" cy="214" rx="93" ry="108" fill="url(#cb-dots)" opacity="0.4" />
 
-      {/* Halftone — right face shadow */}
-      <rect
-        x="440" y="268" width="110" height="250"
-        fill="url(#ht-marcus)" opacity="0.3"
-        clipPath="url(#face-clip-marcus)"
-      />
-
-      {/* Ears */}
-      <ellipse cx="278" cy="364" rx="19" ry="28" fill={AMBER} />
-      <ellipse cx="522" cy="364" rx="19" ry="28" fill={AMBER} />
-
-      {/* ── EYES — slightly skeptical ── */}
-      <ellipse cx="360" cy="344" rx="18" ry="13" fill={STONE} />
-      <ellipse cx="440" cy="344" rx="18" ry="13" fill={STONE} />
-      <circle cx="364" cy="341" r="4" fill={CREAM} />
-      <circle cx="444" cy="341" r="4" fill={CREAM} />
-
-      {/* Skeptical brows — slightly knit */}
-      <path d="M 338 328 Q 360 320 384 326" stroke={STONE} strokeWidth="4.5" fill="none" strokeLinecap="round" />
-      <path d="M 416 326 Q 440 320 462 328" stroke={STONE} strokeWidth="4.5" fill="none" strokeLinecap="round" />
+      {/* Eyes */}
+      <ellipse cx="208" cy="202" rx="13" ry="8" fill={STONE} />
+      <ellipse cx="272" cy="202" rx="13" ry="8" fill={STONE} />
+      <circle cx="205" cy="201" r="3.5" fill={CREAM} opacity="0.7" />
+      <circle cx="269" cy="201" r="3.5" fill={CREAM} opacity="0.7" />
+      <path d="M 195 188 Q 210 183 224 187" stroke={CREAM} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M 258 187 Q 272 183 287 188" stroke={CREAM} strokeWidth="2.5" strokeLinecap="round" fill="none" />
 
       {/* Nose */}
-      <path d="M 390 374 Q 400 396 410 374" stroke={STONE} strokeWidth="3" fill="none" strokeLinecap="round" />
+      <path d="M 238 215 Q 234 238 230 245 Q 238 250 250 245 Q 246 238 242 215 Z" fill={AMBER} opacity="0.3" />
 
-      {/* Neutral, thinking expression */}
-      <path d="M 378 420 Q 400 430 422 420" stroke={STONE} strokeWidth="3" fill="none" strokeLinecap="round" />
+      {/* Expression */}
+      <path d="M 220 268 Q 240 278 260 268" stroke={STONE} strokeWidth="2" strokeLinecap="round" fill="none" />
 
-      {/* Stubble halftone */}
-      <ellipse cx="400" cy="460" rx="65" ry="32" fill="url(#ht-marcus)" opacity="0.22" />
-
-      {/* Grain */}
-      <rect width="800" height="600" fill="url(#grain-marcus)" opacity="0.5" />
+      {/* Amber accent lines */}
+      <rect x="0" y="548" width="480" height="4" fill={AMBER} />
+      <rect x="0" y="0" width="4" height="560" fill={AMBER} opacity="0.5" />
     </svg>
   )
 }
 
-// ─── PRIYA MENON ─────────────────────────────────────────────────────────────
-// Systems designer. Long straight dark hair, composed expression, literary.
-export function PriyaMenonPortrait({ className, style }: PortraitProps) {
+// ─── Vivian Hoang ─────────────────────────────────────────────────────────────
+// Long straight black hair, East Asian features, dark navy ribbed top, delicate necklace + sparkle, warm smile
+function VivianHoangPortrait({ className, style }: PortraitProps = {}) {
   return (
-    <svg
-      viewBox="0 0 800 600"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      style={style}
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 480 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+      style={{ width: '100%', height: '100%', display: 'block' }}>
       <defs>
-        <pattern id="ht-priya" patternUnits="userSpaceOnUse" width="10" height="10">
-          <circle cx="5" cy="5" r="2.2" fill={STONE} />
+        <pattern id="vh-halftone" patternUnits="userSpaceOnUse" width="7" height="7">
+          <circle cx="3.5" cy="3.5" r="1.3" fill={SAGE} opacity="0.3" />
         </pattern>
-        <pattern id="grain-priya" patternUnits="userSpaceOnUse" width="5" height="5">
-          <rect x="0" y="1" width="1" height="1" fill={STONE} opacity="0.26" />
-          <rect x="3" y="0" width="1" height="1" fill={STONE} opacity="0.2" />
-          <rect x="2" y="4" width="1" height="1" fill={STONE} opacity="0.22" />
-          <rect x="4" y="3" width="1" height="1" fill={STONE} opacity="0.17" />
+        <pattern id="vh-grain" patternUnits="userSpaceOnUse" width="3" height="3">
+          <circle cx="1.5" cy="1.5" r="0.5" fill={STONE} opacity="0.1" />
         </pattern>
-        <clipPath id="face-clip-priya">
-          <ellipse cx="400" cy="356" rx="114" ry="128" />
-        </clipPath>
       </defs>
 
-      <rect width="800" height="600" fill={STONE} />
+      {/* Background — warm off-white */}
+      <rect width="480" height="560" fill="#EDE5D8" />
+      <rect width="480" height="560" fill="url(#vh-grain)" />
 
-      {/* Amber glow — right side */}
-      <ellipse cx="680" cy="300" rx="240" ry="300" fill={AMBER} opacity="0.09" />
+      {/* Webflow-inspired diamond */}
+      <path d="M 390 80 L 420 110 L 390 140 L 360 110 Z" fill={SAGE} opacity="0.15" />
+      <path d="M 396 86 L 414 110 L 396 134 L 378 110 Z" stroke={SAGE} strokeWidth="1" fill="none" opacity="0.3" />
 
-      {/* Manuscript lines — subtle background texture (her literary background) */}
-      {[148, 162, 176, 190, 204, 218, 232, 246].map((y, i) => (
-        <line
-          key={i}
-          x1="52"
-          y1={y}
-          x2={i % 4 === 0 ? 240 : i % 4 === 2 ? 210 : 228}
-          y2={y}
-          stroke={CREAM}
-          strokeWidth="0.9"
-          opacity="0.1"
-        />
+      {/* Shoulders — dark navy ribbed top */}
+      <ellipse cx="244" cy="498" rx="175" ry="100" fill={SAGE} opacity="0.4" transform="translate(5,6)" />
+      <ellipse cx="240" cy="492" rx="175" ry="100" fill="#1A2744" />
+      {[0,1,2,3,4,5,6,7,8].map(i => (
+        <line key={i} x1={90 + i*30} y1="420" x2={90 + i*25} y2="560" stroke="#253558" strokeWidth="8" opacity="0.4" />
       ))}
 
-      {/* ── BODY ── */}
-      <g transform="translate(4, 5)">
-        <ellipse cx="400" cy="686" rx="228" ry="108" fill={SAGE} opacity="0.4" />
-      </g>
-      <ellipse cx="400" cy="680" rx="228" ry="108" fill="#1C3A28" />
-
-      {/* Blouse collar */}
-      <polygon points="356,534 400,572 444,534 462,610 338,610" fill={AMBER} opacity="0.75" />
-      <polygon points="356,534 338,610 232,610 290,526" fill="#1C3A28" />
-      <polygon points="444,534 462,610 568,610 510,526" fill="#1C3A28" />
-
       {/* Neck */}
-      <rect x="375" y="503" width="50" height="62" rx="5" fill={AMBER} />
+      <rect x="215" y="322" width="30" height="58" rx="8" fill={SAGE} opacity="0.25" transform="translate(3,4)" />
+      <rect x="212" y="318" width="30" height="58" rx="8" fill="#E8C8A8" />
 
-      {/* ── HAIR — long straight, falls to shoulders ── */}
-      {/* Behind face: stone mass */}
-      <ellipse cx="400" cy="360" rx="162" ry="210" fill={STONE} />
-      {/* Long side curtains */}
-      <path d="M 238 285 Q 210 420 218 584 Q 268 562 276 476 Q 286 376 290 298 Z" fill={STONE} />
-      <path d="M 562 285 Q 590 420 582 584 Q 532 562 524 476 Q 514 376 510 298 Z" fill={STONE} />
-      {/* Top of hair */}
-      <ellipse cx="400" cy="218" rx="134" ry="82" fill={STONE} />
-      <rect x="268" y="198" width="264" height="118" fill={STONE} />
-      {/* Sage hair highlight — soft streak */}
-      <path
-        d="M 338 168 Q 380 148 400 152 Q 420 148 462 168"
-        stroke={SAGE}
-        strokeWidth="6"
-        fill="none"
-        opacity="0.2"
-      />
+      {/* Hair — long straight, very dark */}
+      <path d="M 148 165 Q 140 300 145 480 Q 160 530 200 540 L 200 480 Q 168 350 170 220 Q 178 175 195 160 Z"
+        fill={STONE} opacity="0.5" transform="translate(4,5)" />
+      <path d="M 332 165 Q 320 175 310 220 Q 312 350 280 480 L 280 540 Q 320 530 335 480 Q 340 300 332 165 Z"
+        fill={STONE} opacity="0.5" transform="translate(4,5)" />
+      <path d="M 148 165 Q 140 300 145 480 Q 160 530 200 540 L 200 480 Q 168 350 170 220 Q 178 175 195 160 Z"
+        fill="#0D0B0A" />
+      <path d="M 332 165 Q 320 175 310 220 Q 312 350 280 480 L 280 540 Q 320 530 335 480 Q 340 300 332 165 Z"
+        fill="#0D0B0A" />
+      <path d="M 150 175 Q 180 130 240 122 Q 300 130 330 175 Q 290 150 240 145 Q 190 150 150 175 Z"
+        fill="#0D0B0A" />
+      {/* Hair sheen */}
+      <path d="M 155 180 Q 150 280 155 380 Q 162 320 165 250 Q 168 200 165 180 Z"
+        fill={SAGE} opacity="0.15" />
 
-      {/* ── FACE ── */}
-      <ellipse cx="404" cy="360" rx="114" ry="128" fill={SAGE} opacity="0.55" />
-      <ellipse cx="400" cy="356" rx="114" ry="128" fill={AMBER} />
+      {/* Face */}
+      <ellipse cx="244" cy="215" rx="90" ry="108" fill={SAGE} opacity="0.25" transform="translate(4,5)" />
+      <ellipse cx="240" cy="210" rx="90" ry="108" fill="#E8C8A8" />
+      <ellipse cx="240" cy="210" rx="90" ry="108" fill="url(#vh-halftone)" opacity="0.4" />
 
-      {/* Halftone — left face shadow */}
-      <rect
-        x="286" y="254" width="120" height="240"
-        fill="url(#ht-priya)" opacity="0.25"
-        clipPath="url(#face-clip-priya)"
-      />
-
-      {/* Ears */}
-      <ellipse cx="286" cy="355" rx="16" ry="23" fill={AMBER} />
-      <ellipse cx="514" cy="355" rx="16" ry="23" fill={AMBER} />
-
-      {/* ── EYES — thoughtful, precise ── */}
-      <ellipse cx="361" cy="336" rx="17" ry="12" fill={STONE} />
-      <ellipse cx="439" cy="336" rx="17" ry="12" fill={STONE} />
-      <circle cx="365" cy="333" r="3.5" fill={CREAM} />
-      <circle cx="443" cy="333" r="3.5" fill={CREAM} />
-
-      {/* Brows — slightly raised inner corners (thoughtful) */}
-      <path d="M 343 320 Q 362 314 378 318" stroke={STONE} strokeWidth="3.5" fill="none" strokeLinecap="round" />
-      <path d="M 422 318 Q 438 314 457 320" stroke={STONE} strokeWidth="3.5" fill="none" strokeLinecap="round" />
+      {/* Eyes — almond-shaped */}
+      <path d="M 196 200 Q 210 192 224 200 Q 210 208 196 200 Z" fill={STONE} />
+      <path d="M 256 200 Q 270 192 284 200 Q 270 208 256 200 Z" fill={STONE} />
+      <circle cx="212" cy="199" r="3" fill={CREAM} opacity="0.6" />
+      <circle cx="272" cy="199" r="3" fill={CREAM} opacity="0.6" />
+      <path d="M 197 196 Q 210 191 223 196" stroke={STONE} strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.5" />
+      <path d="M 257 196 Q 270 191 283 196" stroke={STONE} strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.5" />
 
       {/* Nose */}
-      <path d="M 391 365 Q 400 382 409 365" stroke={STONE} strokeWidth="2.5" fill="none" strokeLinecap="round" />
+      <path d="M 238 215 Q 235 235 232 242 Q 239 246 248 242 Q 245 235 242 215 Z" fill={AMBER} opacity="0.25" />
 
-      {/* Composed mouth */}
-      <path d="M 376 408 Q 400 420 424 408" stroke={STONE} strokeWidth="3" fill="none" strokeLinecap="round" />
+      {/* Warm smile */}
+      <path d="M 218 264 Q 240 280 262 264" stroke={STONE} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M 222 266 Q 240 278 258 266" stroke={AMBER} strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.5" />
 
-      {/* Grain */}
-      <rect width="800" height="600" fill="url(#grain-priya)" opacity="0.52" />
+      {/* Delicate necklace */}
+      <path d="M 210 340 Q 240 355 270 340" stroke={AMBER} strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.7" />
+
+      {/* Sparkle accent (from photo detail on top) */}
+      <path d="M 278 320 L 280 312 L 282 320 L 290 322 L 282 324 L 280 332 L 278 324 L 270 322 Z"
+        fill={AMBER} opacity="0.8" />
+
+      {/* Face grain */}
+      <ellipse cx="240" cy="210" rx="90" ry="108" fill="url(#vh-grain)" opacity="0.5" />
+
+      <rect x="0" y="548" width="480" height="4" fill={AMBER} opacity="0.7" />
     </svg>
   )
 }
 
-// ─── DESHAWN OKAFOR ───────────────────────────────────────────────────────────
-// VP of Growth. Broad-shouldered, direct gaze, confident.
-export function DeShawnOkaforPortrait({ className, style }: PortraitProps) {
+// ─── Brianna Chapman ──────────────────────────────────────────────────────────
+// Artistic interpretation — community/connection visual language, Apollo.io context
+function BriannaChapmanPortrait({ className, style }: PortraitProps = {}) {
   return (
-    <svg
-      viewBox="0 0 800 600"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      style={style}
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 480 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+      style={{ width: '100%', height: '100%', display: 'block' }}>
       <defs>
-        <pattern id="ht-deshawn" patternUnits="userSpaceOnUse" width="10" height="10">
-          <circle cx="5" cy="5" r="2.6" fill={STONE} />
+        <pattern id="bc-dots" patternUnits="userSpaceOnUse" width="10" height="10">
+          <circle cx="5" cy="5" r="1.8" fill={SAGE} opacity="0.2" />
         </pattern>
-        <pattern id="grain-deshawn" patternUnits="userSpaceOnUse" width="5" height="5">
-          <rect x="1" y="1" width="1" height="1" fill={STONE} opacity="0.3" />
-          <rect x="3" y="0" width="1" height="1" fill={STONE} opacity="0.24" />
-          <rect x="0" y="3" width="1" height="1" fill={STONE} opacity="0.2" />
-          <rect x="4" y="4" width="1" height="1" fill={STONE} opacity="0.18" />
+        <pattern id="bc-grain" patternUnits="userSpaceOnUse" width="4" height="4">
+          <circle cx="2" cy="2" r="0.6" fill={STONE} opacity="0.1" />
         </pattern>
-        <clipPath id="face-clip-deshawn">
-          <ellipse cx="400" cy="368" rx="122" ry="136" />
-        </clipPath>
       </defs>
 
-      <rect width="800" height="600" fill={STONE} />
+      <rect width="480" height="560" fill={CREAM} />
+      <rect width="480" height="560" fill="url(#bc-dots)" />
 
-      {/* Cycling wheel — background motif (his hobby) */}
-      <circle cx="620" cy="490" r="224" fill="none" stroke={SAGE} strokeWidth="2" opacity="0.1" />
-      <circle cx="620" cy="490" r="162" fill="none" stroke={SAGE} strokeWidth="1" opacity="0.07" />
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
-        <line
-          key={i}
-          x1={620 + 10 * Math.cos((angle * Math.PI) / 180)}
-          y1={490 + 10 * Math.sin((angle * Math.PI) / 180)}
-          x2={620 + 222 * Math.cos((angle * Math.PI) / 180)}
-          y2={490 + 222 * Math.sin((angle * Math.PI) / 180)}
-          stroke={SAGE}
-          strokeWidth="1"
-          opacity="0.07"
-        />
+      {/* Apollo connection nodes — background detail */}
+      <circle cx="380" cy="90" r="6" stroke={AMBER} strokeWidth="1.5" fill="none" opacity="0.3" />
+      <circle cx="420" cy="70" r="4" stroke={AMBER} strokeWidth="1.5" fill="none" opacity="0.3" />
+      <circle cx="400" cy="115" r="5" stroke={AMBER} strokeWidth="1.5" fill="none" opacity="0.3" />
+      <line x1="380" y1="90" x2="420" y2="70" stroke={AMBER} strokeWidth="0.8" opacity="0.2" />
+      <line x1="380" y1="90" x2="400" y2="115" stroke={AMBER} strokeWidth="0.8" opacity="0.2" />
+      <line x1="420" y1="70" x2="400" y2="115" stroke={AMBER} strokeWidth="0.8" opacity="0.2" />
+
+      {/* Shoulders */}
+      <ellipse cx="244" cy="495" rx="168" ry="98" fill={SAGE} opacity="0.4" transform="translate(5,6)" />
+      <ellipse cx="240" cy="490" rx="168" ry="98" fill="#3D2D1A" />
+
+      {/* Neck */}
+      <rect x="215" y="318" width="30" height="60" rx="8" fill={SAGE} opacity="0.25" transform="translate(3,4)" />
+      <rect x="212" y="315" width="30" height="60" rx="8" fill="#D4A87A" />
+
+      {/* Hair — medium dark, warm */}
+      <path d="M 150 180 Q 138 280 142 420 Q 155 490 195 515 Q 165 430 162 320 Q 162 230 168 185 Z"
+        fill={STONE} opacity="0.5" transform="translate(4,5)" />
+      <path d="M 330 180 Q 318 185 318 320 Q 315 430 285 515 Q 325 490 338 420 Q 342 280 330 180 Z"
+        fill={STONE} opacity="0.5" transform="translate(4,5)" />
+      <path d="M 150 180 Q 138 280 142 420 Q 155 490 195 515 Q 165 430 162 320 Q 162 230 168 185 Z" fill="#2A1A0A" />
+      <path d="M 330 180 Q 318 185 318 320 Q 315 430 285 515 Q 325 490 338 420 Q 342 280 330 180 Z" fill="#2A1A0A" />
+      <path d="M 152 188 Q 182 138 240 130 Q 298 138 328 188 Q 290 158 240 152 Q 190 158 152 188 Z" fill="#2A1A0A" />
+
+      {/* Face */}
+      <ellipse cx="244" cy="215" rx="92" ry="110" fill={SAGE} opacity="0.25" transform="translate(4,5)" />
+      <ellipse cx="240" cy="210" rx="92" ry="110" fill="#D4A87A" />
+      <ellipse cx="240" cy="210" rx="92" ry="110" fill="url(#bc-grain)" opacity="0.5" />
+
+      {/* Eyes */}
+      <ellipse cx="209" cy="200" rx="13" ry="8" fill={STONE} />
+      <ellipse cx="271" cy="200" rx="13" ry="8" fill={STONE} />
+      <circle cx="206" cy="199" r="3.5" fill={CREAM} opacity="0.65" />
+      <circle cx="268" cy="199" r="3.5" fill={CREAM} opacity="0.65" />
+      <path d="M 196 192 Q 210 187 222 192" stroke={STONE} strokeWidth="2.2" strokeLinecap="round" fill="none" />
+      <path d="M 258 192 Q 272 187 284 192" stroke={STONE} strokeWidth="2.2" strokeLinecap="round" fill="none" />
+
+      {/* Nose */}
+      <path d="M 237 215 Q 234 238 230 244 Q 238 250 250 244 Q 246 238 243 215 Z" fill={AMBER} opacity="0.28" />
+
+      {/* Warm smile */}
+      <path d="M 217 266 Q 240 282 263 266" stroke={STONE} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+
+      <rect x="0" y="548" width="480" height="4" fill={AMBER} opacity="0.7" />
+      <rect x="16" y="0" width="3" height="560" fill={AMBER} opacity="0.4" />
+    </svg>
+  )
+}
+
+// ─── Tim Metz ─────────────────────────────────────────────────────────────────
+// Short dark brown hair, slightly lean/angular face, light eyes (hazel), warm open smile, beige sweater
+function TimMetzPortrait({ className, style }: PortraitProps = {}) {
+  return (
+    <svg viewBox="0 0 480 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+      style={{ width: '100%', height: '100%', display: 'block' }}>
+      <defs>
+        <pattern id="tm-dots" patternUnits="userSpaceOnUse" width="9" height="9">
+          <circle cx="4.5" cy="4.5" r="1.6" fill={AMBER} opacity="0.2" />
+        </pattern>
+        <pattern id="tm-grain" patternUnits="userSpaceOnUse" width="3" height="3">
+          <circle cx="1.5" cy="1.5" r="0.5" fill={STONE} opacity="0.1" />
+        </pattern>
+      </defs>
+
+      <rect width="480" height="560" fill="#E8E0D5" />
+      <rect width="480" height="560" fill="url(#tm-grain)" />
+      <rect width="480" height="560" fill="url(#tm-dots)" opacity="0.7" />
+
+      {/* Shoulders — beige/tan sweater */}
+      <ellipse cx="244" cy="496" rx="172" ry="100" fill={SAGE} opacity="0.35" transform="translate(5,6)" />
+      <ellipse cx="240" cy="490" rx="172" ry="100" fill="#C8A882" />
+      {[0,1,2,3,4,5].map(i => (
+        <line key={i} x1={80 + i*50} y1="430" x2={80 + i*48} y2="560" stroke="#B89060" strokeWidth="12" opacity="0.25" />
       ))}
 
-      {/* Amber wash — upper left */}
-      <ellipse cx="120" cy="120" rx="200" ry="180" fill={AMBER} opacity="0.09" />
-
-      {/* Sticky note — left corner ("Don't hire the problem away") */}
-      <rect x="32" y="456" width="86" height="72" fill={AMBER} opacity="0.16" />
-      <line x1="42" y1="472" x2="106" y2="472" stroke={CREAM} strokeWidth="1.2" opacity="0.35" />
-      <line x1="42" y1="486" x2="102" y2="486" stroke={CREAM} strokeWidth="1.2" opacity="0.35" />
-      <line x1="42" y1="500" x2="96" y2="500" stroke={CREAM} strokeWidth="1.2" opacity="0.35" />
-
-      {/* ── BODY — broad-shouldered ── */}
-      <g transform="translate(5, 6)">
-        <ellipse cx="400" cy="690" rx="268" ry="128" fill={SAGE} opacity="0.4" />
-      </g>
-      <ellipse cx="400" cy="684" rx="268" ry="128" fill={STONE} />
-
-      {/* Shirt */}
-      <polygon points="348,534 400,598 452,534 476,616 324,616" fill="#0A2010" />
-
       {/* Neck */}
-      <rect x="372" y="502" width="56" height="66" rx="5" fill={AMBER} />
+      <rect x="215" y="318" width="30" height="58" rx="7" fill={SAGE} opacity="0.2" transform="translate(3,4)" />
+      <rect x="212" y="315" width="30" height="58" rx="7" fill="#D4B08A" />
 
-      {/* ── HAIR — very short, close-cropped ── */}
-      <g transform="translate(4, 5)">
-        <ellipse cx="400" cy="278" rx="132" ry="138" fill={SAGE} opacity="0.3" />
-        <ellipse cx="400" cy="206" rx="124" ry="60" fill={SAGE} opacity="0.3" />
-      </g>
-      <ellipse cx="400" cy="278" rx="132" ry="138" fill={STONE} />
-      <ellipse cx="400" cy="206" rx="124" ry="60" fill={STONE} />
+      {/* Hair — short dark brown, slight quiff peak, slightly receding temples */}
+      <path d="M 152 178 Q 155 130 240 122 Q 325 130 328 178 Q 310 158 240 152 Q 170 158 152 178 Z"
+        fill={STONE} opacity="0.4" transform="translate(4,5)" />
+      <path d="M 152 178 Q 155 130 240 122 Q 325 130 328 178 Q 310 158 240 152 Q 170 158 152 178 Z"
+        fill="#2C1E12" />
+      <ellipse cx="240" cy="160" rx="90" ry="50" fill="#2C1E12" />
+      <path d="M 155 185 Q 170 165 240 158 Q 310 165 325 185" fill="#2C1E12" />
+      {/* Receding temple hairline */}
+      <path d="M 162 190 Q 170 175 185 172" stroke="#2C1E12" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M 318 190 Q 310 175 295 172" stroke="#2C1E12" strokeWidth="3" strokeLinecap="round" fill="none" />
 
-      {/* ── FACE ── */}
-      <ellipse cx="405" cy="372" rx="122" ry="136" fill={SAGE} opacity="0.52" />
-      <ellipse cx="400" cy="368" rx="122" ry="136" fill={AMBER} />
+      {/* Face — lean, slightly angular jaw */}
+      <path d="M 170 200 Q 168 260 175 300 Q 185 350 240 380 Q 295 350 305 300 Q 312 260 310 200 Q 290 150 240 145 Q 190 150 170 200 Z"
+        fill={SAGE} opacity="0.25" transform="translate(4,5)" />
+      <path d="M 167 196 Q 165 256 172 296 Q 182 346 240 376 Q 298 346 308 296 Q 315 256 313 196 Q 292 147 240 142 Q 188 147 167 196 Z"
+        fill="#D4B08A" />
+      <path d="M 167 196 Q 165 256 172 296 Q 182 346 240 376 Q 298 346 308 296 Q 315 256 313 196 Q 292 147 240 142 Q 188 147 167 196 Z"
+        fill="url(#tm-grain)" opacity="0.4" />
 
-      {/* Halftone — right side shadow */}
-      <rect
-        x="442" y="262" width="108" height="260"
-        fill="url(#ht-deshawn)" opacity="0.32"
-        clipPath="url(#face-clip-deshawn)"
-      />
-
-      {/* Ears */}
-      <ellipse cx="278" cy="368" rx="18" ry="27" fill={AMBER} />
-      <ellipse cx="522" cy="368" rx="18" ry="27" fill={AMBER} />
-
-      {/* ── EYES — direct gaze ── */}
-      <ellipse cx="360" cy="348" rx="18" ry="13" fill={STONE} />
-      <ellipse cx="440" cy="348" rx="18" ry="13" fill={STONE} />
-      <circle cx="364" cy="344" r="4" fill={CREAM} />
-      <circle cx="444" cy="344" r="4" fill={CREAM} />
-
-      {/* Confident level brows */}
-      <path d="M 336 330 Q 360 322 382 328" stroke={STONE} strokeWidth="5" fill="none" strokeLinecap="round" />
-      <path d="M 418 328 Q 440 322 464 330" stroke={STONE} strokeWidth="5" fill="none" strokeLinecap="round" />
-
-      {/* Nose — structured */}
-      <path d="M 388 376 L 382 402 Q 400 412 418 402 L 412 376" stroke={STONE} strokeWidth="2.5" fill="none" />
-
-      {/* Slight confident smile */}
-      <path d="M 374 430 Q 400 448 426 430" stroke={STONE} strokeWidth="3.5" fill="none" strokeLinecap="round" />
-
-      {/* Grain */}
-      <rect width="800" height="600" fill="url(#grain-deshawn)" opacity="0.54" />
-    </svg>
-  )
-}
-
-// ─── SOFIA REYES ─────────────────────────────────────────────────────────────
-// Agency founder. Shoulder-length wavy hair, earrings, confident + creative.
-export function SofiaReyesPortrait({ className, style }: PortraitProps) {
-  return (
-    <svg
-      viewBox="0 0 800 600"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      style={style}
-      aria-hidden="true"
-    >
-      <defs>
-        <pattern id="ht-sofia" patternUnits="userSpaceOnUse" width="10" height="10">
-          <circle cx="5" cy="5" r="2.3" fill={STONE} />
-        </pattern>
-        <pattern id="grain-sofia" patternUnits="userSpaceOnUse" width="5" height="5">
-          <rect x="0" y="0" width="1" height="1" fill={STONE} opacity="0.28" />
-          <rect x="2" y="3" width="1" height="1" fill={STONE} opacity="0.22" />
-          <rect x="4" y="1" width="1" height="1" fill={STONE} opacity="0.2" />
-          <rect x="1" y="4" width="1" height="1" fill={STONE} opacity="0.17" />
-        </pattern>
-        <clipPath id="face-clip-sofia">
-          <ellipse cx="400" cy="358" rx="116" ry="130" />
-        </clipPath>
-      </defs>
-
-      <rect width="800" height="600" fill={STONE} />
-
-      {/* Geometric accent — top-right triangle (agency founder energy) */}
-      <polygon points="800,0 800,300 540,0" fill={AMBER} opacity="0.07" />
-
-      {/* Sage pool — bottom left */}
-      <ellipse cx="100" cy="520" rx="220" ry="160" fill={SAGE} opacity="0.12" />
-
-      {/* Crossed utensils — small, bottom right corner */}
-      <line x1="696" y1="526" x2="726" y2="556" stroke={CREAM} strokeWidth="3.5" strokeLinecap="round" opacity="0.6" />
-      <line x1="722" y1="524" x2="692" y2="554" stroke={CREAM} strokeWidth="3.5" strokeLinecap="round" opacity="0.6" />
-      <line x1="698" y1="528" x2="686" y2="516" stroke={CREAM} strokeWidth="3.5" strokeLinecap="round" opacity="0.6" />
-      <line x1="720" y1="526" x2="732" y2="514" stroke={CREAM} strokeWidth="3.5" strokeLinecap="round" opacity="0.6" />
-
-      {/* Thin amber rule — top */}
-      <rect x="0" y="0" width="800" height="3" fill={AMBER} opacity="0.4" />
-
-      {/* ── BODY ── */}
-      <g transform="translate(4, 5)">
-        <ellipse cx="400" cy="686" rx="238" ry="112" fill={SAGE} opacity="0.38" />
-      </g>
-      <ellipse cx="400" cy="680" rx="238" ry="112" fill="#0F2A18" />
-
-      {/* Collar */}
-      <polygon points="355,532 400,578 445,532 464,612 336,612" fill={AMBER} opacity="0.8" />
-      <polygon points="355,532 336,612 228,612 286,526" fill="#0F2A18" />
-      <polygon points="445,532 464,612 572,612 514,526" fill="#0F2A18" />
-
-      {/* Neck */}
-      <rect x="375" y="504" width="50" height="62" rx="5" fill={AMBER} />
-
-      {/* ── HAIR — shoulder-length, slightly wavy ── */}
-      {/* Sage shadow register */}
-      <g transform="translate(4, 6)">
-        <ellipse cx="400" cy="348" rx="158" ry="192" fill={SAGE} opacity="0.32" />
-        <path d="M 244 288 Q 228 410 238 552 Q 278 530 282 442 Q 290 356 294 282 Z" fill={SAGE} opacity="0.28" />
-        <path d="M 556 288 Q 572 410 562 552 Q 522 530 518 442 Q 510 356 506 282 Z" fill={SAGE} opacity="0.28" />
-      </g>
-      {/* Stone primary hair */}
-      <ellipse cx="400" cy="348" rx="158" ry="192" fill={STONE} />
-      <path d="M 244 288 Q 228 410 238 552 Q 278 530 282 442 Q 290 356 294 282 Z" fill={STONE} />
-      <path d="M 556 288 Q 572 410 562 552 Q 522 530 518 442 Q 510 356 506 282 Z" fill={STONE} />
-      <ellipse cx="400" cy="212" rx="140" ry="78" fill={STONE} />
-      <rect x="260" y="196" width="280" height="108" fill={STONE} />
-      {/* Hair highlight */}
-      <path
-        d="M 336 172 Q 380 154 400 157 Q 420 154 464 172"
-        stroke={SAGE}
-        strokeWidth="5"
-        fill="none"
-        opacity="0.18"
-      />
-
-      {/* ── FACE ── */}
-      <ellipse cx="404" cy="362" rx="116" ry="130" fill={SAGE} opacity="0.58" />
-      <ellipse cx="400" cy="358" rx="116" ry="130" fill={AMBER} />
-
-      {/* Halftone — right shadow */}
-      <rect
-        x="436" y="256" width="106" height="244"
-        fill="url(#ht-sofia)" opacity="0.26"
-        clipPath="url(#face-clip-sofia)"
-      />
-
-      {/* Ears */}
-      <ellipse cx="284" cy="357" rx="16" ry="23" fill={AMBER} />
-      <ellipse cx="516" cy="357" rx="16" ry="23" fill={AMBER} />
-      {/* Earrings — amber circles */}
-      <circle cx="284" cy="374" r="5" fill={AMBER} />
-      <circle cx="516" cy="374" r="5" fill={AMBER} />
-      {/* Earring misregistration — sage */}
-      <circle cx="286" cy="376" r="5" fill={SAGE} opacity="0.45" />
-      <circle cx="518" cy="376" r="5" fill={SAGE} opacity="0.45" />
-      {/* Earring key ring */}
-      <circle cx="284" cy="374" r="5" fill="none" stroke={STONE} strokeWidth="2" />
-      <circle cx="516" cy="374" r="5" fill="none" stroke={STONE} strokeWidth="2" />
-
-      {/* ── EYES — creative, direct ── */}
-      <ellipse cx="362" cy="338" rx="17" ry="12" fill={STONE} />
-      <ellipse cx="438" cy="338" rx="17" ry="12" fill={STONE} />
-      <circle cx="366" cy="335" r="3.5" fill={CREAM} />
-      <circle cx="442" cy="335" r="3.5" fill={CREAM} />
-
-      {/* Brows — expressive, slightly arched */}
-      <path d="M 344 322 Q 362 314 380 318" stroke={STONE} strokeWidth="3.5" fill="none" strokeLinecap="round" />
-      <path d="M 420 318 Q 438 314 456 322" stroke={STONE} strokeWidth="3.5" fill="none" strokeLinecap="round" />
+      {/* Eyes — light hazel, slightly deep set */}
+      <ellipse cx="208" cy="204" rx="13" ry="8" fill={STONE} />
+      <ellipse cx="272" cy="204" rx="13" ry="8" fill={STONE} />
+      <circle cx="211" cy="202" r="4.5" fill="#5A7A5A" opacity="0.7" />
+      <circle cx="275" cy="202" r="4.5" fill="#5A7A5A" opacity="0.7" />
+      <circle cx="209" cy="201" r="2.5" fill={CREAM} opacity="0.7" />
+      <circle cx="273" cy="201" r="2.5" fill={CREAM} opacity="0.7" />
+      <path d="M 195 190 Q 210 185 222 189" stroke={STONE} strokeWidth="2" strokeLinecap="round" fill="none" />
+      <path d="M 258 189 Q 270 185 285 190" stroke={STONE} strokeWidth="2" strokeLinecap="round" fill="none" />
 
       {/* Nose */}
-      <path d="M 391 365 Q 400 382 409 365" stroke={STONE} strokeWidth="2.5" fill="none" strokeLinecap="round" />
+      <path d="M 238 218 Q 234 242 230 248 Q 238 254 250 248 Q 246 242 242 218 Z" fill={AMBER} opacity="0.28" />
 
-      {/* Confident smile */}
-      <path d="M 374 407 Q 400 422 426 407" stroke={STONE} strokeWidth="3" fill="none" strokeLinecap="round" />
-      {/* Upper lip */}
-      <path d="M 374 407 Q 387 400 400 402 Q 413 400 426 407" stroke={STONE} strokeWidth="1.8" fill="none" strokeLinecap="round" />
+      {/* Warm open smile, slightly asymmetric */}
+      <path d="M 218 272 Q 240 288 262 272" stroke={STONE} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M 222 274 Q 240 286 258 274" stroke={AMBER} strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.5" />
+      {/* Teeth suggestion */}
+      <path d="M 223 274 Q 240 285 257 274 Q 257 280 240 282 Q 223 280 223 274 Z"
+        fill={CREAM} opacity="0.7" />
 
-      {/* Grain */}
-      <rect width="800" height="600" fill="url(#grain-sofia)" opacity="0.52" />
+      <rect x="0" y="548" width="480" height="4" fill={AMBER} />
     </svg>
   )
 }
 
-export const PORTRAIT_COMPONENTS: Record<
-  string,
-  React.ComponentType<{ className?: string; style?: React.CSSProperties }>
-> = {
-  'bri-callahan':   BriCallahanPortrait,
-  'marcus-reid':    MarcusReidPortrait,
-  'priya-menon':    PriyaMenonPortrait,
-  'deshawn-okafor': DeShawnOkaforPortrait,
-  'sofia-reyes':    SofiaReyesPortrait,
+// ─── Lauren Shufran ───────────────────────────────────────────────────────────
+// Short slicked-back dark hair (pompadour/quiff), strong defined features,
+// tattoo-covered arms (ancient relief on right, botanical on left), black sleeveless top,
+// intense direct gaze, small stud earring — they/them
+function LaurenShufranPortrait({ className, style }: PortraitProps = {}) {
+  return (
+    <svg viewBox="0 0 480 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+      style={{ width: '100%', height: '100%', display: 'block' }}>
+      <defs>
+        <pattern id="ls-dots" patternUnits="userSpaceOnUse" width="8" height="8">
+          <circle cx="4" cy="4" r="1.4" fill={AMBER} opacity="0.3" />
+        </pattern>
+        <pattern id="ls-grain" patternUnits="userSpaceOnUse" width="3" height="3">
+          <circle cx="1.5" cy="1.5" r="0.55" fill={STONE} opacity="0.15" />
+        </pattern>
+      </defs>
+
+      {/* Dark dramatic background */}
+      <rect width="480" height="560" fill={STONE} />
+      <rect width="480" height="560" fill="url(#ls-dots)" opacity="0.5" />
+
+      {/* Shoulders — wide, athletic, black sleeveless */}
+      <ellipse cx="244" cy="496" rx="190" ry="105" fill={SAGE} opacity="0.3" transform="translate(5,6)" />
+      <ellipse cx="240" cy="490" rx="190" ry="105" fill="#0A0A0A" />
+
+      {/* Arms — sleeveless reveals arms */}
+      <path d="M 65 400 Q 60 450 70 510 L 110 510 Q 108 460 112 410 Z" fill="#0A0A0A" />
+      <path d="M 415 400 Q 420 450 410 510 L 370 510 Q 372 460 368 410 Z" fill="#0A0A0A" />
+
+      {/* Right arm tattoo — ancient relief/Mesopotamian (framed art piece with Arabic script) */}
+      <rect x="68" y="415" width="40" height="50" rx="3" stroke={AMBER} strokeWidth="1.2" fill="none" opacity="0.6" />
+      <path d="M 75 430 Q 80 425 90 430 Q 95 440 88 445 Q 80 450 75 443 Z"
+        stroke={AMBER} strokeWidth="0.8" fill="none" opacity="0.5" />
+      <path d="M 72 452 L 108 452" stroke={AMBER} strokeWidth="0.6" opacity="0.4" />
+      <path d="M 72 458 L 103 458" stroke={AMBER} strokeWidth="0.6" opacity="0.4" />
+      <path d="M 72 464 L 100 464" stroke={AMBER} strokeWidth="0.6" opacity="0.4" />
+
+      {/* Left arm tattoo — botanical/floral */}
+      <path d="M 375 425 Q 380 415 390 420 Q 395 430 388 438 Q 380 445 373 438 Q 370 430 375 425 Z"
+        stroke={SAGE} strokeWidth="0.9" fill="none" opacity="0.5" />
+      <path d="M 388 440 Q 395 450 392 462 Q 386 470 380 462 Q 376 450 380 440"
+        stroke={SAGE} strokeWidth="0.9" fill="none" opacity="0.5" />
+      <path d="M 373 460 Q 380 472 385 480 Q 380 475 370 478"
+        stroke={SAGE} strokeWidth="0.7" fill="none" opacity="0.4" />
+      <circle cx="384" cy="445" r="4" stroke={SAGE} strokeWidth="0.7" fill="none" opacity="0.4" />
+      <circle cx="376" cy="455" r="3" stroke={SAGE} strokeWidth="0.7" fill="none" opacity="0.4" />
+
+      {/* Neck */}
+      <rect x="212" y="315" width="36" height="65" rx="8" fill={SAGE} opacity="0.2" transform="translate(3,4)" />
+      <rect x="208" y="310" width="36" height="65" rx="8" fill="#C8A888" />
+
+      {/* Hair — very short, slicked back pompadour/quiff */}
+      <ellipse cx="244" cy="165" rx="98" ry="75" fill={SAGE} opacity="0.25" transform="translate(4,5)" />
+      <ellipse cx="240" cy="160" rx="98" ry="75" fill="#1A0F08" />
+      <path d="M 155 175 Q 175 140 240 132 Q 285 135 310 148" stroke="#1A0F08" strokeWidth="18" strokeLinecap="round" fill="none" />
+      {/* Swept direction */}
+      <path d="M 170 168 Q 200 152 240 148 Q 275 150 305 162"
+        stroke={SAGE} strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.2" />
+      {/* Undercut sides — closely cropped */}
+      <path d="M 158 188 Q 162 170 175 168" stroke="#1A0F08" strokeWidth="12" strokeLinecap="round" fill="none" />
+      <path d="M 322 188 Q 318 170 305 168" stroke="#1A0F08" strokeWidth="12" strokeLinecap="round" fill="none" />
+
+      {/* Face — strong, defined */}
+      <path d="M 168 200 Q 166 258 174 296 Q 185 344 240 372 Q 295 344 306 296 Q 314 258 312 200 Q 292 150 240 144 Q 188 150 168 200 Z"
+        fill={SAGE} opacity="0.25" transform="translate(4,5)" />
+      <path d="M 165 196 Q 163 254 171 292 Q 182 340 240 368 Q 298 340 309 292 Q 317 254 315 196 Q 294 147 240 141 Q 186 147 165 196 Z"
+        fill="#C8A888" />
+      <path d="M 165 196 Q 163 254 171 292 Q 182 340 240 368 Q 298 340 309 292 Q 317 254 315 196 Q 294 147 240 141 Q 186 147 165 196 Z"
+        fill="url(#ls-grain)" opacity="0.5" />
+
+      {/* Eyes — dark, direct, intense */}
+      <ellipse cx="208" cy="202" rx="14" ry="9" fill={STONE} />
+      <ellipse cx="272" cy="202" rx="14" ry="9" fill={STONE} />
+      <circle cx="205" cy="200" r="5" fill="#2A1A1A" />
+      <circle cx="269" cy="200" r="5" fill="#2A1A1A" />
+      <circle cx="203" cy="198" r="2.5" fill={CREAM} opacity="0.65" />
+      <circle cx="267" cy="198" r="2.5" fill={CREAM} opacity="0.65" />
+      {/* Strong brows */}
+      <path d="M 193 188 Q 210 182 224 186" stroke={STONE} strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M 256 186 Q 270 182 287 188" stroke={STONE} strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M 196 191 Q 210 185 222 188" stroke={AMBER} strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.4" />
+      <path d="M 258 188 Q 272 185 285 191" stroke={AMBER} strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.4" />
+
+      {/* Nose */}
+      <path d="M 237 218 Q 233 244 228 250 Q 237 257 252 250 Q 247 244 243 218 Z" fill={AMBER} opacity="0.3" />
+
+      {/* Composed, direct expression */}
+      <path d="M 218 268 Q 240 274 262 268" stroke={STONE} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+
+      {/* Small stud earring */}
+      <circle cx="162" cy="225" r="4" fill={AMBER} opacity="0.8" />
+
+      {/* Amber spine */}
+      <rect x="0" y="0" width="4" height="560" fill={AMBER} opacity="0.6" />
+      <rect x="0" y="548" width="480" height="4" fill={AMBER} />
+    </svg>
+  )
+}
+
+// ─── Export map ───────────────────────────────────────────────────────────────
+export const PORTRAIT_COMPONENTS: Record<string, ComponentType<PortraitProps>> = {
+  'lucy-hoyle':       LucyHoylePortrait,
+  'connor-beaulieu':  ConnorBeaulieuPortrait,
+  'vivian-hoang':     VivianHoangPortrait,
+  'brianna-chapman':  BriannaChapmanPortrait,
+  'tim-metz':         TimMetzPortrait,
+  'lauren-shufran':   LaurenShufranPortrait,
 }

@@ -25,14 +25,14 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Champion Stories | AirOps',
-    template: '%s | Champion Stories',
+    default: 'Meet the Content Engineers | AirOps',
+    template: '%s | Meet the Content Engineers',
   },
   description:
     'Meet the marketers redefining what\'s possible with content engineering. Real stories, real careers, real results.',
   openGraph: {
     type: 'website',
-    siteName: 'Champion Stories by AirOps',
+    siteName: 'Meet the Content Engineers by AirOps',
   },
   twitter: {
     card: 'summary_large_image',
