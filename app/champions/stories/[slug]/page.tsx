@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const champion = getChampionBySlug(slug)
   if (!champion) return {}
 
-  const title = `${champion.editorialHeadline} | Champion Stories`
+  const title = `${champion.editorialHeadline} | Content Engineers`
   const description = champion.introParagraph.slice(0, 160)
   const url = absoluteUrl(`/champions/stories/${slug}`)
 
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url,
       type: 'article',
       publishedTime: champion.publishDate,
-      images: [{ url: absoluteUrl(champion.ogImage), width: 1200, height: 630, alt: `${champion.name} — ${champion.editorialHeadline}` }],
+      images: [{ url: absoluteUrl(champion.ogImage), width: 1200, height: 630, alt: `${champion.name}: ${champion.editorialHeadline}` }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -50,6 +50,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
   }
 }
+
+// Editorial palette
+const HERO_BG   = '#1A1310'
+const CREAM     = '#F6F1E9'
+const ACCENT    = '#C4722A'
+const INK       = '#1C1A14'
+const MUTED     = '#5A4A38'
+const RULE      = '#DDD4C2'
 
 const PULL_QUOTE_AFTER = [2, 5, 8]
 
@@ -63,157 +71,290 @@ export default async function StoryPage({ params }: PageProps) {
   const Portrait = PORTRAIT_COMPONENTS[slug]
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: CREAM }}>
 
-      {/* Nav */}
+      {/* Dark header — minimal, no CTA above fold */}
       <header
-        className="sticky top-0 z-50 flex items-center justify-between px-6 py-4"
-        style={{ backgroundColor: '#ffffff', borderBottom: '1px solid #d4e8da' }}
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 50,
+          backgroundColor: HERO_BG,
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '16px 32px',
+        }}
       >
-        <Link href="/champions/stories" className="link-mono inline-flex items-center gap-2">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <Link
+          href="/champions/stories"
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            fontWeight: 500,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'rgba(246,241,233,0.45)',
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            transition: 'color 0.15s',
+          }}
+        >
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          Champion Stories
+          Content Engineers
         </Link>
-
-        <a href="https://www.airops.com" target="_blank" rel="noopener noreferrer" className="hidden sm:inline-block btn-nav">
-          Start a Trial
-        </a>
+        <span
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            color: 'rgba(246,241,233,0.22)',
+          }}
+        >
+          AirOps
+        </span>
       </header>
 
-      {/* Hero — full-width portrait + overlaid headline */}
-      <div className="relative w-full overflow-hidden" style={{ maxHeight: '70vh', minHeight: '400px' }}>
-        {/* Portrait illustration — full bleed */}
+      {/* HERO — full bleed, dark, dramatic */}
+      <div
+        style={{
+          position: 'relative',
+          backgroundColor: HERO_BG,
+          minHeight: '88vh',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Portrait illustration — fills the hero */}
         {Portrait ? (
-          <Portrait className="w-full" style={{ display: 'block' }} />
+          <div style={{ flex: 1, position: 'relative', minHeight: '400px' }}>
+            <Portrait
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                display: 'block',
+              }}
+            />
+          </div>
         ) : (
-          <div className={`w-full ${champion.portraitTint}`} style={{ aspectRatio: '16/9' }} />
+          <div
+            className={champion.portraitTint}
+            style={{ flex: 1, minHeight: '400px' }}
+          />
         )}
 
-        {/* Gradient overlay for text legibility */}
+        {/* Bottom gradient for text legibility */}
         <div
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)',
-          }}
           aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: `linear-gradient(to top, ${HERO_BG} 0%, ${HERO_BG}E6 18%, ${HERO_BG}80 42%, transparent 70%)`,
+          }}
         />
 
-        {/* Overlaid headline + byline */}
-        <div className="absolute bottom-0 left-0 right-0 px-8 pb-10 max-w-4xl mx-auto" style={{ left: 0, right: 0 }}>
-          <div className="max-w-3xl mx-auto">
-            <h1
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontStyle: 'italic',
-                fontSize: 'clamp(2rem, 5vw, 3.75rem)',
-                lineHeight: '1.05',
-                letterSpacing: '-0.025em',
-                color: '#ffffff',
-                marginBottom: '16px',
-                textShadow: '0 2px 20px rgba(0,0,0,0.5)',
-              }}
-            >
-              {champion.editorialHeadline}
-            </h1>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-              <div>
-                <span style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', fontWeight: 600, color: '#ffffff' }}>
-                  {champion.name}
-                </span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(255,255,255,0.65)', marginLeft: '12px', letterSpacing: '0.05em' }}>
-                  {champion.role}, {champion.company} &middot; {formatDate(champion.publishDate)}
-                </span>
-              </div>
-            </div>
+        {/* Thin amber rule accent — left edge */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '3px',
+            height: '100%',
+            backgroundColor: ACCENT,
+            opacity: 0.7,
+          }}
+        />
+
+        {/* Hero text — sits at the bottom */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            padding: 'clamp(32px, 5vw, 72px)',
+          }}
+        >
+          {/* Series tag */}
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: ACCENT,
+              marginBottom: '20px',
+            }}
+          >
+            Content Engineers / A Profile
+          </div>
+
+          {/* Headline */}
+          <h1
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontStyle: 'italic',
+              fontSize: 'clamp(2.5rem, 6.5vw, 5.25rem)',
+              lineHeight: '1.0',
+              letterSpacing: '-0.03em',
+              color: CREAM,
+              marginBottom: '28px',
+              maxWidth: '16em',
+            }}
+          >
+            {champion.editorialHeadline}
+          </h1>
+
+          {/* Byline — magazine credit line */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '6px',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              letterSpacing: '0.07em',
+              textTransform: 'uppercase',
+            }}
+          >
+            <span style={{ color: CREAM, fontWeight: 600 }}>{champion.name}</span>
+            <span style={{ color: 'rgba(246,241,233,0.25)' }}>/</span>
+            <span style={{ color: 'rgba(246,241,233,0.5)' }}>{champion.role}</span>
+            <span style={{ color: 'rgba(246,241,233,0.25)' }}>/</span>
+            <span style={{ color: 'rgba(246,241,233,0.5)' }}>{champion.company}</span>
+            <span style={{ color: 'rgba(246,241,233,0.25)' }}>/</span>
+            <span style={{ color: 'rgba(246,241,233,0.4)' }}>{formatDate(champion.publishDate)}</span>
           </div>
         </div>
       </div>
 
-      <main className="max-w-2xl mx-auto px-6 pb-24">
+      {/* CONTENT — warm cream */}
+      <main style={{ backgroundColor: CREAM }}>
 
-        {/* Share + divider */}
-        <div className="py-6" style={{ borderBottom: '1px solid #d4e8da' }}>
+        {/* Share + thin rule */}
+        <div
+          style={{
+            maxWidth: '720px',
+            margin: '0 auto',
+            padding: '24px 32px',
+            borderBottom: `1px solid ${RULE}`,
+          }}
+        >
           <ShareButtons url={storyUrl} title={champion.editorialHeadline} />
         </div>
 
-        {/* Editorial intro — with drop cap */}
+        {/* Editorial intro with drop cap */}
         <section
-          className="py-10"
-          style={{ borderBottom: '1px solid #d4e8da' }}
+          style={{
+            maxWidth: '720px',
+            margin: '0 auto',
+            padding: '56px 32px 52px',
+            borderBottom: `1px solid ${RULE}`,
+          }}
           aria-label="Editorial introduction"
         >
           <p
-            className="drop-cap"
+            className="drop-cap-warm"
             style={{
               fontFamily: 'var(--font-display)',
               fontStyle: 'italic',
-              fontSize: '20px',
-              lineHeight: '1.75',
-              color: '#1a2e1f',
+              fontSize: '1.25rem',
+              lineHeight: '1.85',
+              color: INK,
+              maxWidth: '62ch',
             }}
           >
             {champion.introParagraph}
           </p>
         </section>
 
-        {/* Q + A header */}
+        {/* Q + A section divider — large display, asymmetric */}
         <div
-          className="flex items-baseline gap-4 py-8"
-          style={{ borderBottom: '2px solid #000d05' }}
+          style={{
+            maxWidth: '720px',
+            margin: '0 auto',
+            padding: '52px 32px 36px',
+          }}
           aria-hidden="true"
         >
-          <span
+          <div
             style={{
-              fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
-              fontSize: '64px',
-              lineHeight: 1,
-              letterSpacing: '-0.04em',
-              color: '#008c44',
+              display: 'flex',
+              alignItems: 'flex-end',
+              gap: '0',
+              paddingBottom: '18px',
+              borderBottom: `2px solid ${INK}`,
+              marginBottom: '12px',
             }}
           >
-            Q
-          </span>
-          <span
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '20px',
-              color: '#d4e8da',
-              marginBottom: '4px',
-            }}
-          >
-            +
-          </span>
-          <span
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
-              fontSize: '64px',
-              lineHeight: 1,
-              letterSpacing: '-0.04em',
-              color: '#000d05',
-            }}
-          >
-            A
-          </span>
-          <span
+            <span
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontStyle: 'italic',
+                fontSize: 'clamp(88px, 14vw, 160px)',
+                lineHeight: '0.82',
+                letterSpacing: '-0.045em',
+                color: ACCENT,
+                marginRight: '10px',
+              }}
+            >
+              Q
+            </span>
+            <span
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '28px',
+                color: RULE,
+                marginBottom: '6px',
+                marginRight: '10px',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              +
+            </span>
+            <span
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontStyle: 'italic',
+                fontSize: 'clamp(88px, 14vw, 160px)',
+                lineHeight: '0.82',
+                letterSpacing: '-0.045em',
+                color: INK,
+              }}
+            >
+              A
+            </span>
+          </div>
+          <div
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '11px',
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
-              color: '#4a6355',
-              marginBottom: '6px',
+              color: MUTED,
             }}
           >
-            {champion.name}
-          </span>
+            {champion.name} in conversation
+          </div>
         </div>
 
         {/* Q&A */}
-        <article aria-label="Interview Q&A">
+        <article
+          style={{ maxWidth: '720px', margin: '0 auto', padding: '0 32px 64px' }}
+          aria-label="Interview Q&A"
+        >
           {champion.qa.map((item, index) => {
             const pullQuoteIdx = PULL_QUOTE_AFTER.indexOf(index)
             const pullQuote = pullQuoteIdx !== -1 ? champion.pullQuotes[pullQuoteIdx] : null
@@ -223,29 +364,66 @@ export default async function StoryPage({ params }: PageProps) {
                 {/* Mid-story portrait break at Q4 */}
                 {index === 3 && Portrait && (
                   <div
-                    className="w-full overflow-hidden -mx-6 my-10"
-                    style={{ width: 'calc(100% + 48px)' }}
+                    style={{
+                      margin: '52px -32px',
+                      overflow: 'hidden',
+                      maxHeight: '340px',
+                    }}
                     role="img"
-                    aria-label={`Illustration for ${champion.name}`}
+                    aria-label={`Illustration: ${champion.name}`}
                   >
-                    <Portrait className="w-full" style={{ maxHeight: '280px', objectFit: 'cover', display: 'block' }} />
+                    <Portrait
+                      style={{
+                        width: '100%',
+                        display: 'block',
+                        maxHeight: '340px',
+                      }}
+                    />
                   </div>
                 )}
 
                 {/* Q&A item */}
-                <div className="py-8" style={{ borderBottom: '1px solid #d4e8da' }}>
-                  {/* Large decorative Q */}
-                  <div className="flex gap-4 items-start mb-3">
-                    <span className="qa-question-label" aria-hidden="true">Q.</span>
+                <div
+                  style={{
+                    paddingTop: '44px',
+                    paddingBottom: '44px',
+                    borderBottom: `1px solid ${RULE}`,
+                  }}
+                >
+                  {/* Question with large Q. prefix */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      gap: '14px',
+                      alignItems: 'flex-start',
+                      marginBottom: '22px',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-display)',
+                        fontStyle: 'italic',
+                        fontSize: '52px',
+                        lineHeight: '1',
+                        letterSpacing: '-0.03em',
+                        color: ACCENT,
+                        marginTop: '-2px',
+                        flexShrink: 0,
+                        userSelect: 'none',
+                      }}
+                      aria-hidden="true"
+                    >
+                      Q.
+                    </span>
                     <h2
                       style={{
                         fontFamily: 'var(--font-display)',
                         fontStyle: 'italic',
-                        fontSize: '18px',
-                        lineHeight: '1.4',
-                        color: '#000d05',
-                        paddingTop: '14px',
-                        flex: 1,
+                        fontSize: '1.125rem',
+                        lineHeight: '1.5',
+                        color: INK,
+                        paddingTop: '13px',
+                        margin: 0,
                       }}
                     >
                       {item.question}
@@ -256,27 +434,38 @@ export default async function StoryPage({ params }: PageProps) {
                   <p
                     style={{
                       fontFamily: 'var(--font-sans)',
-                      fontSize: '17px',
-                      lineHeight: '1.75',
-                      color: '#1a2e1f',
-                      paddingLeft: '0',
+                      fontSize: '1.0625rem',
+                      lineHeight: '1.82',
+                      color: INK,
+                      maxWidth: '62ch',
+                      margin: 0,
                     }}
                   >
                     {item.answer}
                   </p>
                 </div>
 
-                {pullQuote && <PullQuote quote={pullQuote} />}
+                {pullQuote && <PullQuote quote={pullQuote} accent={ACCENT} ink={INK} rule={RULE} />}
 
                 {/* Second portrait break at Q7 */}
                 {index === 6 && Portrait && (
                   <div
-                    className="w-full overflow-hidden -mx-6 my-10"
-                    style={{ width: 'calc(100% + 48px)' }}
+                    style={{
+                      margin: '52px -32px',
+                      overflow: 'hidden',
+                      maxHeight: '280px',
+                    }}
                     role="img"
-                    aria-label={`Second illustration for ${champion.name}`}
+                    aria-label={`Illustration: ${champion.name}`}
                   >
-                    <Portrait className="w-full" style={{ maxHeight: '220px', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+                    <Portrait
+                      style={{
+                        width: '100%',
+                        display: 'block',
+                        maxHeight: '280px',
+                        objectPosition: 'top',
+                      }}
+                    />
                   </div>
                 )}
               </div>
@@ -285,21 +474,81 @@ export default async function StoryPage({ params }: PageProps) {
         </article>
 
         {/* Bottom share */}
-        <div className="py-8" style={{ borderTop: '1px solid #d4e8da' }}>
+        <div
+          style={{
+            maxWidth: '720px',
+            margin: '0 auto',
+            padding: '32px 32px',
+            borderTop: `1px solid ${RULE}`,
+          }}
+        >
           <ShareButtons url={storyUrl} title={champion.editorialHeadline} />
         </div>
 
-        <CTASection />
-        <StoryNav prev={prev} next={next} />
+        {/* CTA + nav */}
+        <div style={{ maxWidth: '720px', margin: '0 auto', padding: '0 32px' }}>
+          <CTASection />
+          <StoryNav prev={prev} next={next} />
+        </div>
       </main>
 
-      <footer className="px-6 py-8 text-center" style={{ borderTop: '1px solid #d4e8da' }}>
-        <div className="flex items-center justify-center gap-4 mb-2">
-          <Link href="/champions/stories" className="link-mono">Champion Stories</Link>
-          <span style={{ color: '#d4e8da' }}>&middot;</span>
-          <a href="https://www.airops.com" target="_blank" rel="noopener noreferrer" className="link-mono">AirOps</a>
+      {/* Footer — dark, matches header */}
+      <footer
+        style={{
+          backgroundColor: HERO_BG,
+          borderTop: '1px solid rgba(255,255,255,0.07)',
+          padding: '36px 32px',
+          textAlign: 'center',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '20px',
+            marginBottom: '12px',
+          }}
+        >
+          <Link
+            href="/champions/stories"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              letterSpacing: '0.09em',
+              textTransform: 'uppercase',
+              color: 'rgba(246,241,233,0.35)',
+              textDecoration: 'none',
+            }}
+          >
+            Content Engineers
+          </Link>
+          <span style={{ color: 'rgba(246,241,233,0.12)' }}>&middot;</span>
+          <a
+            href="https://www.airops.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              letterSpacing: '0.09em',
+              textTransform: 'uppercase',
+              color: 'rgba(246,241,233,0.35)',
+              textDecoration: 'none',
+            }}
+          >
+            AirOps
+          </a>
         </div>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: '#4a6355' }}>
+        <p
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+            color: 'rgba(246,241,233,0.18)',
+          }}
+        >
           &copy; {new Date().getFullYear()} AirOps
         </p>
       </footer>

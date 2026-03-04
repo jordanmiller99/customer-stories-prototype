@@ -132,6 +132,18 @@ body {
   color: #008c44;
 }
 
+/* Drop cap — warm amber variant for editorial story pages */
+.drop-cap-warm::first-letter {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 5.2em;
+  line-height: 0.78;
+  float: left;
+  margin-right: 8px;
+  margin-top: 6px;
+  color: #C4722A;
+}
+
 /* Q&A — large decorative "Q" prefix */
 .qa-question-label {
   display: block;
