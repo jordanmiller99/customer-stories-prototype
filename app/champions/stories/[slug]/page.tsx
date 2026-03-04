@@ -74,9 +74,9 @@ export default async function StoryPage({ params }: PageProps) {
 
   return (
     <PageReveal
-      pullQuote={champion.pullQuotes[0]}
       name={champion.name}
       role={champion.role}
+      company={champion.company}
     >
       <div style={{ minHeight: '100vh', backgroundColor: CREAM }}>
 
